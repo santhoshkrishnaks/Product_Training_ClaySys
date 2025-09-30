@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Display Property Examples</title>
+        <style>
+            body{
+                font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            }
+            .Header{
+                text-align: center;
+                background-color: #f2f2f2;
+                height: 90px;
+                align-content: center;
+            }
+            .Nav{
+                margin-top: 0px;
+                background-color: black;
+                height: 50px;
+                align-content: center;
+            }
+            .Nav ul{
+                list-style: none;
+                text-align: center;
+            }
+            .Nav li{
+                display: inline;
+                margin-right:25px;
+                font-size: 20px;
+            }
+            .Nav li a{
+               text-decoration: none;
+               color: white; 
+            }
+            .Container1{
+                justify-items: center;
+                display: block;
+            }
+
+            .box1{
+                width: 80%;
+                height: 50px;
+                background-color: green;
+                margin: 10px;
+                justify-items: center;
+                color: white;
+            }
+            .box1>h5{
+                padding-top: 15px;
+            }
+            .Container2{
+                display: inline-flex;
+                width: 100%;
+                justify-content: center;
+                margin-top: 40px;
+                
+            }
+            .box2{
+                display: inline;
+                width:200px;
+                background-color: rgb(0, 153, 255);
+                color:white;
+                margin-left: 30px;
+                justify-items: center;
+            }
+            .Container3{
+                
+                width: 100%;
+                margin-top: 60px;
+                text-align: center;
+            }
+            .box3{
+                display: inline-block;
+                width: 190px;
+                margin-left: 30px;
+                height: 80px;
+                background-color:orange;
+                color: white ;
+            }
+            .box3 h5{
+                padding-top: 10px;
+            }
+        .footer{
+                text-align: center;
+                background-color: #fff0f0;
+                margin-top: 25px;
+                height: 30px;
+            }
+            .footer p{
+                padding-top: 8px;
+            }
+            </style>
+    </head>
+    <body>
+         <div class="Header">
+            <h1>Display Property Examples</h1>
+        </div>
+        <div class="Nav">
+            <ul>
+  <li><a href="#home">Home</a></li>
+  <li><a href="#news">About</a></li>
+  <li><a href="#contact">Service</a></li>
+  <li><a href="#about">Contact</a></li>
+</ul>
+        </div>
+        <div class="Container1">
+            <div class="box1">
+                <h5>Block Element 1 (display: block)</h5>
+            </div>
+            <div class="box1">
+<h5>Block Element 2 (display: block)</h5>
+            </div>
+            <div class="box1">
+<h5>Block Element 3 (display: block)</h5>
+            </div>
+        </div>
+        <div class="Container2">
+            <div class="box2">
+                <h5>Inline Element 1</h5>
+            </div>
+            <div class="box2">
+                <h5>Inline Element 2</h5>
+                
+            </div>
+            <div class="box2">
+                <h5>Inline Element 3</h5>
+
+            </div>
+        </div>
+        <div class="Container3">
+            <div class="box3">
+                <h5>Inline Block 1</h5>
+            </div>
+            <div class="box3">
+                <h5>Inline Block 2</h5>
+                
+            </div>
+            <div class="box3">
+                <h5>Inline Block 3</h5>
+
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>
+                © 2024 Display Property Examples
+            </p>
+    </body>
+</html>
