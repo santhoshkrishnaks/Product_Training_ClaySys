@@ -13,12 +13,36 @@
                 margin-right: 15px;
                 padding-left: 35px;
                 padding-right: 35px;
-                
-                
             }
+            .I{
+               background-color:#eceaea;
+                margin-left: 15px;
+                margin-right: 15px;
+                padding: 35px;
+            }
+            .I .h1:hover{
+                color: yellow;
+            }
+            input:focus{
+                background-color: black;
+                color: white;
+            }
+            p::first-letter{
+                font-size: 30px;
+                color: aqua;
+                text-transform: capitalize;
+            }
+.I p::after{
+   content: "🔗"; 
+}
+.I p::selection{
+    text-decoration: underline;
+    background-color: chartreuse;
+}
             .Introduction h3{
                 font-size: 25px;
                 padding-top: 35px;
+                text-transform: uppercase;
                 
             }
             .Introduction p{
@@ -63,6 +87,8 @@
                 border-width: 2.5px;
                 height: 200px;
                 width: 300px;
+                text-align: justify;
+                padding: 1%;
             }
             .footer{
                 text-align: center;
@@ -88,24 +114,36 @@
 </ul>
         </div>
         <div class="Introduction">
-            <h3>Introduction:</h2>
+            <h3>Introduction:</h3>
                 <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
         </div>
         <div class="Container">
             <div class="box">
-                <p>
-
+                <h3>Box 1:Written Content</h3>
+                <p>Blog posts, articles, ebooks, case studies, and social media posts are common forms of written content used to provide information and tell stories. 
+                </p>
+            </div>
+            <div class="box">
+                <h3>Box 2:Visual Content</h3>
+                <p>Infographics, images, and videos are popular for presenting information in a digestible and engaging way
+                </p>
+                
+            </div>
+            <div class="box">
+                <h3>Box 3:Audio Content</h3>
+                <p>Podcasts are a growing form of audio content that allows for in-depth discussions and storytelling. 
                 </p>
 
             </div>
-            <div class="box">
-
-            </div>
-            <div class="box">
-
-            </div>
         </div>
-        <div class="Introduction"></div>
+        <div class="I">
+            <h2>Pseudo-Classes Example:</h2>
+            <h4 class="h1">Hover Me To See</h4>
+            <input id="name" value="" type="text" placeholder="Click me To focus"/><br>
+            <h2>Pseudo-Elements Example:</h2>
+            <p>The entire paragraph must focus on a single, central idea to maintain a coherent message.Ideas within the paragraph should flow logically, with sentences connecting smoothly to one another.The topic sentence must be sufficiently developed with relevant supporting details and examples to thoroughly explain the main point. </p>
+        </div>
+
         <div class="footer">
             <p>
                 © 2024 CSS Basics Review
