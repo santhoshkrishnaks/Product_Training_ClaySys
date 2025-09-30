@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>FlexBox Layout Example</title>
+        <style>
+            body{
+                height: 100%;
+                width: 100%;
+            }
+            .Header{
+                height: 6.5rem;
+                width: 100%;
+                background-color: #f2f2f2;
+                text-align: center;
+                align-content: center;
+            }
+            .Header>span{
+                font-size: 3.2rem;
+            }
+            .Nav{
+                background-color: black;
+                color: white;
+                display: flex;
+                flex-direction: row;
+                height: 3rem;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 4.5rem;
+            }
+            .Nav>.menu{
+                width: 7.5%;
+                height: 100%;
+                cursor: pointer;
+                align-content: center;
+                text-align: center;
+            }
+            #a{
+                margin-left: 2%;
+            }
+            .Nav>.menu>span{
+                font-size: 1.19rem;
+            }
+            .Flex,.Flex2,.Flex3{
+                display: flex;
+                width: 100vw;
+                height: 15vh;
+                margin-top: 1.6rem;
+                justify-content: space-evenly;
+            }
+            #box{
+                height: 100%;
+                width: 30%;
+                background-color:green;
+                align-content: center;
+                text-align: center;
+            }
+            #box>span{
+                font-size: 1.6rem;
+                color: white;
+            }
+            .footer{
+                margin-top: 2rem;
+                height: 3rem;
+                background-color: #f2f2f2;
+                align-content: center;
+                text-align: center;
+            }
+            .footer>span{
+                font-size: 1.3rem;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="Header">
+            <span>Flexbox Layout Example</span>
+        </div>
+        <div class="Nav">
+            <div class="menu"><span>Home</span></div>
+            <div class="menu" id="a"><span>About</span></div>
+            <div class="menu" id="a"><span>Service</span></div>
+            <div class="menu" id="a"><span>Contact</span></div>
+        </div>
+        <div class="Flex">
+            <div class="row1" id="box"><span>Content Box 1</span></div>
+            <div class="row1" id="box"><span>Content Box 2</span></div>
+        </div>
+        <div class="Flex2">
+            <div class="row2" id="box"><span>Content Box 3</span></div>
+            <div class="row2" id="box"><span>Content Box 4</span></div>
+        </div>
+        <div class="Flex3">
+            <div class="row3" id="box"><span>Content Box 5</span></div>
+            <div class="row3" id="box"><span>Content Box 6</span></div>
+        </div>
+        <div class="footer">
+            <span>© 2024 Flexbox Layout Example</span>
+        </div>
+    </body>
+</html>
