@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Draggable Excercise</title>
+        <style>
+            .Header{
+                text-align: center;
+                background-color: #f2f2f2;
+                height: 90px;
+                align-content: center;
+            }
+            .footer{
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                text-align: center;
+                background-color: #f2f2f2;
+                height: 30px;
+            }
+            .OuterBox{
+                background-color: #f2f2f2;
+                border-style: solid;
+                border-color: #acacac;
+                position: relative;
+                height: 250px;
+                width: 400px;
+                justify-self: center;
+                margin-top: 50px;
+            }
+            .InnerBox{
+                background-color: green;
+                position: absolute;
+                top: 70px;
+                left: 70px;
+                height: 60px;
+                width: 150px;
+            text-align: center;
+            align-content: space-around;
+            }
+            .OuterBox2{
+                position: fixed;
+                background-color: rgb(25, 180, 252);
+                height: 50px;
+                width: 200px;
+                text-align: center;
+            align-content: space-around;
+            margin: 6%;
+            }
+            span{
+                font-size: medium;
+                color: white;
+                
+            }
+        </style>
+    </head>
+    <body>
+        <div class="Header">
+            <h1>Draggable Excercise</h1>
+        </div>
+        <div class="OuterBox">
+            <div class="InnerBox">
+                <span>Drag Me Within Box</span>
+            </div>
+        </div>
+        <div class="OuterBox2">
+            <span>Drag Me Within Window</span>
+        </div>
+        <div class="footer">
+            <p>
+                © 2024 CSS Basics Review
+            </p>
+        </div>
+    </body>
+</html>
