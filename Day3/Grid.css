@@ -6,12 +6,12 @@ body{
                 height: 4.5rem;
                 width: 100%;
                 background-color: green;
-                text-align: center;
-                align-content: center;
+                display: grid;
+                grid-template-columns: auto auto;
+                align-items: center;
             }
-            .header>span{
-                color: white;
-                font-size: 1.5rem;
+            .item2{
+                
             }
             .footer{
                 margin-top: 2rem;
@@ -51,6 +51,15 @@ body{
                 height: 100%;
                 left: 30.5%;
                 background-color: #f2f2f2;
+            }
+            .box{
+                height: 20px;
+                width: 20px;
+                position: absolute;
+                background-color: aqua;
+                bottom: 50%;
+                right: 0;
+
             }
             @media screen and (max-width: 480px) {
                 .header>span{
