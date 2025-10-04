@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="FinalDashBoard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>DashBoard</title>
+    <link rel="stylesheet" href="FinalDashBoard.css">
 </head>
 <body>
     <div class="aside container1">
@@ -13,55 +13,66 @@
             <img src="logo.PNG" alt="logo"/>
         </div>
         <div class="box box2">
-            <img src="dashboard.PNG" alt="dashboard" height="20px" width="20px" >
-            <div>Dashboard</div></div>
-            <div class="box box3">
-            <img src="inventory.PNG" alt="Inventory" height="20px" width="20px" >
-            <div>Inventory</div></div>
-            <div class="box box4">
-            <img src="tracking.PNG" alt="Tracking" height="20px" width="20px" >
-            <div>Tracking</div></div>
-            <div class="box box5">
-            <img src="shop.png" alt="Order" height="20px" width="20px" >
-            <div>Orders</div></div>
-            <div class="box box6">
-            <img src="report.PNG" alt="Report Analytics" height="20px" width="20px" >
-            <div>Report Analytics</div></div>
-            <div class="box box7">
-            <img src="user.PNG" alt="User Authentication" height="20px" width="20px" >
-            <div>User Authentication</div></div>
-            <div class="box box8">
-            <img src="setting.PNG" alt="Setting" height="20px" width="20px" >
-            <div>Setting</div></div>
+            <img src="dashboard.PNG" alt="dashboard" height="20px" width="20px">
+            <div>Dashboard</div>
+        </div>
+        <div class="box box3">
+            <img src="inventory.PNG" alt="Inventory" height="20px" width="20px">
+            <div>Inventory</div>
+        </div>
+        <div class="box box4">
+            <img src="tracking.PNG" alt="Tracking" height="20px" width="20px">
+            <div>Tracking</div>
+        </div>
+        <div class="box box5">
+            <img src="shop.png" alt="Order" height="20px" width="20px">
+            <div>Orders</div>
+        </div>
+        <div class="box box6">
+            <img src="report.PNG" alt="Report Analytics" height="20px" width="20px">
+            <div>Report Analytics</div>
+        </div>
+        <div class="box box7">
+            <img src="user.PNG" alt="User Authentication" height="20px" width="20px">
+            <div>User Authentication</div>
+        </div>
+        <div class="box box8">
+            <img src="setting.PNG" alt="Setting" height="20px" width="20px">
+            <div>Setting</div>
+        </div>
     </div>
-
 
     <div class="main container2">
-
         <div class="order">
-    <div class="left">Order</div>
-    <div class="right">
-        <div class="shop">
-            <span>Bravaa shop</span>
-            <img src="dropdown.png" alt="Bravaa shop dropdown" />
+            <div class="left">
+                <div class="menubar"><img src="menu.webp" alt="menubar" width="20px" height="20px"></div>
+                <div>Order</div></div>
+            <div class="right">
+                <div class="shop">
+                    <span>Bravaa shop</span>
+                    <img src="dropdown.png" alt="Bravaa shop dropdown" />
+                </div>
+                <div class="notification">
+                    <img src="notification.webp" alt="Notification Icon" />
+                </div>
+                <div class="profile">
+                    <img src="profile.webp" alt="Profile Photo" />
+                </div>
+            </div>
         </div>
-        <div class="notification">
-      <img src="notification.webp" alt="Notification Icon" />
-    </div>
-    <div class="profile">
-      <img src="profile.webp" alt="Profile Photo" />
-    </div>
-    </div>
-</div>
 
         <div class="ordermenu"><span class="home">Home</span> / Order</div>
+        
         <div class="menu">
             <div class="summary">
                 <div class="text">Order Summary</div>
                 <div class="button1">
-                    <div class="b1"><span style="font-size: 1rem;">+</span> <span style="font-size: 0.6rem;">Add Product</span></div>
+                    <div class="b1"><button class="btn btn-primary">
+                            <span><img src="plus.webp" alt="download" height="20px" width="20px"></span> Add Product
+                        </button></div>
                 </div>
             </div>
+            
             <div class="boxes">
                 <div class="bo1">
                     <div class="title t1">Total Order</div>
@@ -85,7 +96,182 @@
                     </div>
                 </div>
             </div>
-            <div class="items"></div>
+            
+            <div class="items">
+                <div class="items-header">
+                    <div class="items-title">Order Items</div>
+                    <div class="items-controls">
+                        <button class="btn">
+                            <span><img src="filter.webp" alt="download" height="20px" width="20px"></span> Filter
+                        </button>
+                        <button class="btn">
+                            <span><img src="date.webp" alt="download" height="20px" width="20px"></span> Date
+                        </button>
+                        <button class="btn btn-primary">
+                            <span><img src="download.webp" alt="download" height="20px" width="20px"></span> Export
+                        </button>
+                    </div>
+                </div>
+                <div class="search-box">
+                    <input type="text" placeholder="Search">
+                </div>
+                <br>
+
+                <div class="table-container">
+                    <div class="table-grid">
+                        <div class="table-header">
+                            <div><input type="checkbox"></div>
+                            <div>Order</div>
+                            <div>Customers</div>
+                            <div>Tracking Id</div>
+                            <div>Oder Date</div>
+                            <div>Quantity</div>
+                            <div>Location</div>
+                            <div>Total</div>
+                            <div>Status</div>
+                            <div>Action</div>
+                        </div>
+                        <div class="table-row">
+                            <div><input type="checkbox"></div>
+                            <div>#1002</div>
+                            <div>Arlene McCoy</div>
+                            <div>#TS121321</div>
+                            <div>Today - 4:20 pm</div>
+                            <div>20</div>
+                            <div>Sylhed, Bondor</div>
+                            <div>$500.00</div>
+                            <div><span class="status completed">Completed</span></div>
+                            <div>
+                                <div class="dropdown">
+                                    <button class="dropdown-toggle">⋮</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Row 2 -->
+                        <div class="table-row">
+                            <div><input type="checkbox"></div>
+                            <div>#1002</div>
+                            <div>Floyd Miles</div>
+                            <div>#TS121321</div>
+                            <div>Today - 4:20 pm</div>
+                            <div>24</div>
+                            <div>Sylhed, Bondor</div>
+                            <div>$500.00</div>
+                            <div><span class="status in-process">In Process</span></div>
+                            <div>
+                                <div class="dropdown">
+                                    <button class="dropdown-toggle">⋮</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Row 3 -->
+                        <div class="table-row">
+                            <div><input type="checkbox" checked></div>
+                            <div>#1002</div>
+                            <div>Ralph Edwards</div>
+                            <div>#TS121321</div>
+                            <div>Today - 4:20 pm</div>
+                            <div>12</div>
+                            <div>Sylhed, Bondor</div>
+                            <div>$500.00</div>
+                            <div><span class="status pending">Pending</span></div>
+                            <div>
+                                <div class="dropdown">
+                                    <button class="dropdown-toggle">⋮</button>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Row 4 -->
+                        <div class="table-row">
+                            <div><input type="checkbox"></div>
+                            <div>#1002</div>
+                            <div>Brooklyn Simmons</div>
+                            <div>#TS121321</div>
+                            <div>Today - 4:20 pm</div>
+                            <div>15</div>
+                            <div>Sylhed, Bondor</div>
+                            <div>$500.00</div>
+                            <div><span class="status completed">Completed</span></div>
+                            <div>
+                                <div class="dropdown">
+                                    <button class="dropdown-toggle">⋮</button>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-row">
+                            <div><input type="checkbox"></div>
+                            <div>#1002</div>
+                            <div>Dianne Russell</div>
+                            <div>#TS121321</div>
+                            <div>Today - 4:20 pm</div>
+                            <div>20</div>
+                            <div>Sylhed, Bondor</div>
+                            <div>$500.00</div>
+                            <div><span class="status in-process">In Process</span></div>
+                            <div>
+                                <div class="dropdown">
+                                    <button class="dropdown-toggle">⋮</button>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-row">
+                            <div><input type="checkbox"></div>
+                            <div>#1002</div>
+                            <div>Devon Lane</div>
+                            <div>#TS121321</div>
+                            <div>Today - 4:20 pm</div>
+                            <div>15</div>
+                            <div>Sylhed, Bondor</div>
+                            <div>$500.00</div>
+                            <div><span class="status completed">Completed</span></div>
+                            <div>
+                                <div class="dropdown">
+                                    <button class="dropdown-toggle" >⋮</button>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-row">
+                            <div><input type="checkbox"></div>
+                            <div>#1002</div>
+                            <div>Courtney Henry</div>
+                            <div>#TS121321</div>
+                            <div>Today - 4:20 pm</div>
+                            <div>15</div>
+                            <div>Sylhed, Bondor</div>
+                            <div>$500.00</div>
+                            <div><span class="status pending">Pending</span></div>
+                            <div>
+                                <div class="dropdown">
+                                    <button class="dropdown-toggle" >⋮</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-row">
+                            <div><input type="checkbox"></div>
+                            <div>#1002</div>
+                            <div>Esther Howard</div>
+                            <div>#TS121321</div>
+                            <div>Today - 4:20 pm</div>
+                            <div>00</div>
+                            <div>Sylhed, Bondor</div>
+                            <div>$500.00</div>
+                            <div><span class="status in-process">In Process</span></div>
+                            <div>
+                                <div class="dropdown">
+                                    <button class="dropdown-toggle">⋮</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>
