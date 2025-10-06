@@ -1,0 +1,80 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+}
+body{
+    width: 100vw;
+    height: 99vh;
+    align-content: center;
+}
+.outercontainer{
+    width: 45%;
+    height: 70%;
+    border: 2px solid skyblue;
+    justify-self: center;
+    border-radius: 5px;
+}
+.innercontainer{
+    height: 96.8%;
+    border: 2px solid black;
+    border-radius: 5px;
+    margin: 5px;
+    overflow: auto  ;
+}
+.heading{
+    margin-top: 2em;
+    margin-left: 1.6em;
+    font-size: 2.4em;
+}
+.field{
+    display: inline-flex;
+    align-items: center;
+    height:5.5em;
+}
+#task{
+    width: 350px;
+    height: 35px;
+    margin-left: 3em;
+    font-size: 1.5em;
+}
+#addbtn{
+    margin-left: 2.5em;
+    background-color:#007FFF;
+    padding: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.list{
+    width: 90%;
+    height: 50%;
+    overflow: auto;
+    justify-self: center;
+}
+#lists{
+    width: 100%;
+    height: 100%;
+}
+li{
+    display: flex;
+    height: 25%;
+    align-items: center;
+    min-height: 3.8em;
+}
+input[type="checkbox"]{
+    margin: 1em 2em;
+    width: 15px;
+    height: 15px;
+}
+p{
+    width: 35em;
+    font-size: 1.5em;
+}
+.delbtn{
+     margin-left: 2.5em !important;
+    background-color:red;
+    padding: 15px;
+    border-radius: 1em;
+    cursor: pointer;
+}
+
