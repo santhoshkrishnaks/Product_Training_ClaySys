@@ -40,6 +40,7 @@ h1{
     text-align: center;
     width: 5em;
     color: white;
+    cursor: pointer;
 }
 .data {
     display: flex;
