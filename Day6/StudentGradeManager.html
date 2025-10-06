@@ -1,13 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Student Grade Manager</title>
-    <link rel="stylesheet" href="StudentGradeManager.css">
-</head>
-<body>
-    
+    <link rel="stylesheet" href="StudentGradeManager.css" />
+  </head>
+  <body>
+    <div class="outer">
+      <div class="inner">
+        <h1 class="heading">Student Grades Manager</h1>
+        <p class="label">Student Name:</p>
+        <input type="text" placeholder="Enter student name" id="studentname" />
+        <p class="label">Grade:</p>
+        <input type="text" placeholder="Enter grade" id="studentgrade" />
+        <div id="addbtn">Add Student</div>
+        <div id="disbtn">Display Grade</div>
+        <div class="studentlist">
+          <h3>Grades List:</h3>
+          <ol id="list">
+            <li>Student Name-Grade</li>
+            <li>Student Name-Grade</li>
+            <li>Student Name-Grade</li>
+            <li>Student Name-Grade</li>
+            <li>Student Name-Grade</li>
+          </ol>
+        </div>
+        <div id="avgbtn">Calculate Average Grade</div>
+        <h3>Average Grade:</h3>
+        <p></p>
+      </div>
+    </div>
     <script src="StudentGradeManager.js"></script>
-</body>
+  </body>
 </html>

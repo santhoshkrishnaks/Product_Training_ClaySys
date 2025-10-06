@@ -1,0 +1,84 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+body {
+  width: 100vw;
+  height: 99.3vh;
+}
+.outer {
+  border: 2px solid skyblue;
+  width: 38%;
+  height: 97vh;
+  padding: 0.4%;
+  border-radius: 7px;
+  justify-self: center;
+}
+.inner {
+  border: 2px solid gray;
+  height: 100%;
+  border-radius: 7px;
+  overflow: auto;
+  justify-items: center;
+}
+.heading {
+  margin-top: 10%;
+  text-align: center;
+  font-weight: 550;
+  margin-bottom: 5%;
+}
+.label {
+  text-align: center;
+  margin-bottom: 1em;
+  font-size: 1.2em;
+}
+#studentname {
+  width: 20em;
+  height: 1.8em;
+  font-size: 1.1em;
+  place-self: center;
+  margin-bottom: 1em;
+  margin-left: 5em;
+}
+#studentgrade {
+  width: 20em;
+  height: 1.8em;
+  font-size: 1.1em;
+  margin-left: 5em;
+  margin-bottom: 1em;
+}
+#addbtn {
+  background-color: #24a0ed;
+  padding: 0.8em;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 1em;
+}
+#disbtn {
+  background-color: #24a0ed;
+  padding: 0.8em;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 1em;
+}
+#avgbtn {
+  background-color: #24a0ed;
+  padding: 0.8em;
+  color: white;
+  cursor: pointer;
+  margin: 1em 0em;
+}
+.studentlist {
+  width: 85%;
+  height: 15%;
+  overflow: auto;
+}
+#list {
+  list-style-type: decimal;
+  margin-left: 0.4em;
+  padding: 0.3em 1em;
+}
+li {
+  margin-bottom: 0.4em;
+}
