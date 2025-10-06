@@ -35,9 +35,8 @@ function addtask(){
 function deletetask(e){
     if(e.target.className==="delbtn"){
         const li=e.target.closest('li');
+        const hr=li.nextElementSibling;
         if(li)li.remove();
-        const hr=li.nextElementSibling('hr');
         if (hr && hr.tagName === 'HR') hr.remove();
-        
     }
 }
