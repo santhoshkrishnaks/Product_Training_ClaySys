@@ -1,0 +1,76 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+body{
+    width: 100vw;
+    height: 99.3vh;
+}
+.outer{
+    border: 2px solid skyblue;
+    width: 38%;
+    height: 97.5vh;
+    padding: 0.4%;
+    border-radius: 7px;
+    justify-self: center;
+}
+.inner{
+    border: 2px solid gray;
+    height: 100%;
+    border-radius: 7px;
+    overflow: auto;
+}
+.heading{
+    margin-top: 1em;
+    margin-left: 0.8em;
+    font-size: 1.9em;
+}
+.label{
+    margin: 1.3em 0em;
+    margin-left: 1.65em;
+}
+input{
+    margin-left: 1.5em;
+    width: 85%;
+    height: 2em;
+    font-size: 1.2em;
+}
+#addbtn{
+    background-color: rgb(1, 105, 146);
+    width: 85%;
+    text-align: center;
+    place-self: center;
+    margin-top: 1.5em;
+    margin-bottom: 0.7em;
+    padding: 0.5em;
+    color: white;
+    cursor: pointer;
+}
+.list{
+    width: 95%;
+    place-self: center;
+    height: 27%;
+    overflow: auto;
+}
+h3{
+    margin: 1em 1em;
+}
+table{
+margin-left:1em ;
+width: 90%;
+border: 1px solid gray;
+border-collapse: collapse;
+}
+th{
+    border: 1px solid gray;
+    border-collapse: collapse;
+    padding: 0.7em;
+    background-color: rgb(196, 196, 196);
+}
+td{
+    padding: 0.7em;
+    border: 1px solid gray;
+    border-collapse: collapse;
+    font-weight: 500;
+}

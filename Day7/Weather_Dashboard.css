@@ -1,0 +1,62 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family:Arial, Helvetica, sans-serif;
+}
+body{
+    width: 100vw;
+    height: 99vh;
+    align-content: center;
+}
+.outer{
+    width: 45%;
+    height: 70%;
+    border: 2px solid skyblue;
+    justify-self: center;
+    border-radius: 5px;
+}
+.inner{
+    height: 96.8%;
+    border: 2px solid black;
+    border-radius: 5px;
+    margin: 5px;
+    overflow: auto  ;
+}
+h1{
+    margin: 1em;
+}
+.bar{
+    display: flex;
+    justify-content: center;
+}
+#city{
+    width: 70%;
+    font-size: 1.2em;
+}
+#searchbtn{
+    background-color: rgb(5, 124, 172);
+    padding: 0.7em;
+    align-items: center;
+    text-align: center;
+    width: 5em;
+    color: white;
+}
+.data {
+    display: flex;
+    justify-content: space-between;
+    width: 95%;
+    justify-self: center;
+}
+
+.label {
+    margin-top: 2em;
+    margin-left: 1em;
+    font-size: 1.2em;
+    text-align: left;
+}
+
+.value {
+    font-size: 1.2em;
+    margin-top: 2em;
+    text-align: right;
+}
