@@ -7,31 +7,32 @@
     <link rel="stylesheet" href="User_Management_System.css">
 </head>
 <body>
-    <div>
-        <div>
-            <h1>Add User</h1>
-            <hr>
-            <div>
-                <p>Name:</p>
+    <div class="outer">
+        <div class="inner">
+            <h1 class="heading">Add User</h1>
+            <hr class="dash">
+            <div class="field">
+                <p class="label">Name:</p>
                 <input type="text" id="name">
-                <p>Email:</p>
-                <input type="text" id="name">
-                <p>Role:</p>
+                <p class="label">Email:</p>
+                <input type="text" id="email">
+                <p class="label">Role:</p>
                 <select id="dropdown" name="dropdown">
 <option value="admin">Admin</option>
 <option value="member">Member</option>
 </select>
+<button>Add User</button>
             </div>
             <h1>User List</h1>
             <hr>
             <ol>
                 <li>
-                    <p></p>
-                    <p></p>
-                    <p></p>
-                    <p></p>
-                    <div></div>
-                    <div></div>
+                    <p class="s">1</p>
+                    <p>Username</p>
+                    <p>Email</p>
+                    <p>Role</p>
+                    <button>Edit</button>
+                    <button>Delete</button>
                 </li>
             </ol>
         </div>
