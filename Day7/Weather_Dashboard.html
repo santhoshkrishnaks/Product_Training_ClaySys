@@ -14,10 +14,11 @@
             <input type="text" placeholder="Enter city name" id="city">
             <div id="searchbtn">Search</div>
             </div>
-            <div class="data"><p class="label">City Name:</p><p class="value">San Francisco</p></div>
-            <div class="data"><p class="label">Temperature:</p><p class="value">18°C</p></div>
-            <div class="data"><p class="label">Humidity:</p><p class="value">72%</p></div>
-            <div class="data"><p class="label">Weather Icon:</p><p class="value"></p></div>
+            <div class="data"><p class="label">City Name:</p><p class="value" id="name">San Francisco</p></div>
+            <div class="data"><p class="label">Temperature:</p><p class="value" id="Temperature">18°C</p></div>
+            <div class="data"><p class="label">Humidity:</p><p class="value" id="Humidity">72%</p></div>
+            <div class="data"><p class="label">Weather Icon:</p><img class="value" id="icon"></img></div>
+            <h1 style="color: red;display: none;" id="error"></h1>
         </div>
     </div>
     <script src="Weather_Dashboard.js"></script>
