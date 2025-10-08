@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Budget Manager</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --bg-main: #f8fafc;
+            --bg-card: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .income-card .stat-icon {
+            background: #dcfce7;
+            color: var(--success);
+        }
+
+        .expense-card .stat-icon {
+            background: #fee2e2;
+            color: var(--danger);
+        }
+
+        .balance-card .stat-icon {
+            background: #dbeafe;
+            color: var(--primary);
+        }
+
+        .savings-card .stat-icon {
+            background: #fef3c7;
+            color: var(--warning);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            font-size: 0.875rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.875rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.75rem;
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .transaction-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .transaction-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            transition: background 0.2s;
+        }
+
+        .transaction-item:hover {
+            background: var(--bg-main);
+        }
+
+        .transaction-info {
+            flex: 1;
+        }
+
+        .transaction-category {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .transaction-date {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .transaction-amount {
+            font-weight: 700;
+            font-size: 1.125rem;
+            margin-right: 1rem;
+        }
+
+        .amount-income {
+            color: var(--success);
+        }
+
+        .amount-expense {
+            color: var(--danger);
+        }
+
+        .goals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .goal-card {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transition: all 0.2s;
+        }
+
+        .goal-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .goal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .goal-name {
+            font-weight: 700;
+            font-size: 1.125rem;
+        }
+
+        .goal-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+        }
+
+        .goal-amounts {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+            font-size: 0.875rem;
+        }
+
+        .current-amount {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .target-amount {
+            color: var(--text-secondary);
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--success), #34d399);
+            transition: width 0.3s;
+        }
+
+        .progress-percentage {
+            text-align: center;
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .chart-container {
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-main);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .chart-placeholder {
+            color: var(--text-secondary);
+            text-align: center;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .modal-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn-secondary {
+            background: var(--border);
+            color: var(--text-primary);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-secondary);
+        }
+
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .radio-option {
+            flex: 1;
+            position: relative;
+        }
+
+        .radio-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .radio-label {
+            display: block;
+            padding: 0.75rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .radio-option input[type="radio"]:checked + .radio-label {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .achieved-badge {
+            display: inline-block;
+            background: var(--success);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                💰 Personal Budget Manager
+            </div>
+            <div style="color: rgba(255,255,255,0.9); font-size: 0.875rem;">
+                Welcome back! 👋
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Dashboard Statistics -->
+        <div class="dashboard-grid">
+            <div class="stat-card income-card">
+                <div class="stat-icon">📈</div>
+                <div class="stat-label">Total Income</div>
+                <div class="stat-value" style="color: var(--success);">$5,000.00</div>
+            </div>
+            <div class="stat-card expense-card">
+                <div class="stat-icon">📉</div>
+                <div class="stat-label">Total Expenses</div>
+                <div class="stat-value" style="color: var(--danger);">$3,200.00</div>
+            </div>
+            <div class="stat-card balance-card">
+                <div class="stat-icon">💵</div>
+                <div class="stat-label">Remaining Balance</div>
+                <div class="stat-value" style="color: var(--primary);">$1,800.00</div>
+            </div>
+            <div class="stat-card savings-card">
+                <div class="stat-icon">🎯</div>
+                <div class="stat-label">Savings Progress</div>
+                <div class="stat-value" style="color: var(--warning);">65%</div>
+            </div>
+        </div>
+
+        <!-- Add Transaction & Transaction List -->
+        <div class="content-grid">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Add Transaction</h2>
+                </div>
+                <form id="transactionForm">
+                    <div class="form-group">
+                        <label class="form-label">Transaction Type</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="income" name="type" value="income" checked>
+                                <label for="income" class="radio-label">💰 Income</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="expense" name="type" value="expense">
+                                <label for="expense" class="radio-label">💸 Expense</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Amount</label>
+                            <input type="number" class="form-control" placeholder="0.00" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Category</label>
+                            <select class="form-control" required>
+                                <option value="">Select Category</option>
+                                <option value="salary">Salary</option>
+                                <option value="food">Food</option>
+                                <option value="rent">Rent</option>
+                                <option value="utilities">Utilities</option>
+                                <option value="entertainment">Entertainment</option>
+                                <option value="transport">Transport</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Date</label>
+                        <input type="date" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Description (Optional)</label>
+                        <input type="text" class="form-control" placeholder="Add notes...">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Transaction</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Recent Transactions</h2>
+                </div>
+                <div class="transaction-list">
+                    <div class="transaction-item">
+                        <div class="transaction-info">
+                            <div class="transaction-category">Monthly Salary</div>
+                            <div class="transaction-date">Oct 1, 2025</div>
+                        </div>
+                        <div class="transaction-amount amount-income">+$5,000</div>
+                        <button class="btn btn-danger btn-sm">Delete</button>
+                    </div>
+                    <div class="transaction-item">
+                        <div class="transaction-info">
+                            <div class="transaction-category">Grocery Shopping</div>
+                            <div class="transaction-date">Oct 3, 2025</div>
+                        </div>
+                        <div class="transaction-amount amount-expense">-$150</div>
+                        <button class="btn btn-danger btn-sm">Delete</button>
+                    </div>
+                    <div class="transaction-item">
+                        <div class="transaction-info">
+                            <div class="transaction-category">Rent Payment</div>
+                            <div class="transaction-date">Oct 5, 2025</div>
+                        </div>
+                        <div class="transaction-amount amount-expense">-$1,200</div>
+                        <button class="btn btn-danger btn-sm">Delete</button>
+                    </div>
+                    <div class="transaction-item">
+                        <div class="transaction-info">
+                            <div class="transaction-category">Utilities</div>
+                            <div class="transaction-date">Oct 6, 2025</div>
+                        </div>
+                        <div class="transaction-amount amount-expense">-$120</div>
+                        <button class="btn btn-danger btn-sm">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Savings Goals -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">
+                <h2 class="card-title">Savings Goals</h2>
+                <button class="btn btn-primary btn-sm" onclick="openGoalModal()">+ New Goal</button>
+            </div>
+            <div class="goals-grid">
+                <div class="goal-card">
+                    <div class="goal-header">
+                        <div class="goal-name">Vacation Fund</div>
+                        <div class="goal-icon">🏖️</div>
+                    </div>
+                    <div class="goal-amounts">
+                        <span class="current-amount">$3,250</span>
+                        <span class="target-amount">of $5,000</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 65%"></div>
+                    </div>
+                    <div class="progress-percentage">65% Complete</div>
+                    <button class="btn btn-success btn-sm" style="width: 100%;" onclick="openContributionModal()">+ Add Contribution</button>
+                </div>
+
+                <div class="goal-card">
+                    <div class="goal-header">
+                        <div class="goal-name">Emergency Fund</div>
+                        <div class="goal-icon">🚨</div>
+                    </div>
+                    <div class="goal-amounts">
+                        <span class="current-amount">$2,000</span>
+                        <span class="target-amount">of $10,000</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 20%"></div>
+                    </div>
+                    <div class="progress-percentage">20% Complete</div>
+                    <button class="btn btn-success btn-sm" style="width: 100%;" onclick="openContributionModal()">+ Add Contribution</button>
+                </div>
+
+                <div class="goal-card" style="border: 2px solid var(--success);">
+                    <div class="goal-header">
+                        <div class="goal-name">New Laptop <span class="achieved-badge">✓ Achieved</span></div>
+                        <div class="goal-icon">💻</div>
+                    </div>
+                    <div class="goal-amounts">
+                        <span class="current-amount">$1,500</span>
+                        <span class="target-amount">of $1,500</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%"></div>
+                    </div>
+                    <div class="progress-percentage">100% Complete 🎉</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Expense Categorization -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Expense Breakdown</h2>
+            </div>
+            <div class="chart-container">
+                <div class="chart-placeholder">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">📊</div>
+                    <div>Expense chart will be displayed here</div>
+                    <div style="font-size: 0.875rem; margin-top: 0.5rem;">Using Chart.js or similar library</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Goal Modal -->
+    <div class="modal" id="goalModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Create New Savings Goal</h3>
+            </div>
+            <form>
+                <div class="form-group">
+                    <label class="form-label">Goal Name</label>
+                    <input type="text" class="form-control" placeholder="e.g., Dream Vacation">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Target Amount</label>
+                    <input type="number" class="form-control" placeholder="0.00">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeGoalModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create Goal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Contribution Modal -->
+    <div class="modal" id="contributionModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Add Contribution</h3>
+            </div>
+            <div style="background: var(--bg-main); padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                <div style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0.25rem;">Available Balance</div>
+                <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary);">$1,800.00</div>
+            </div>
+            <form>
+                <div class="form-group">
+                    <label class="form-label">Contribution Amount</label>
+                    <input type="number" class="form-control" placeholder="0.00">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeContributionModal()">Cancel</button>
+                    <button type="submit" class="btn btn-success">Add to Goal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openGoalModal() {
+            document.getElementById('goalModal').classList.add('active');
+        }
+
+        function closeGoalModal() {
+            document.getElementById('goalModal').classList.remove('active');
+        }
+
+        function openContributionModal() {
+            document.getElementById('contributionModal').classList.add('active');
+        }
+
+        function closeContributionModal() {
+            document.getElementById('contributionModal').classList.remove('active');
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const goalModal = document.getElementById('goalModal');
+            const contributionModal = document.getElementById('contributionModal');
+            
+            if (event.target === goalModal) {
+                closeGoalModal();
+            }
+            if (event.target === contributionModal) {
+                closeContributionModal();
+            }
+        }
+
+        // Form submission handler (placeholder)
+        document.getElementById('transactionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Transaction added! (This is a demo - integrate with your JavaScript logic)');
+        });
+    </script>
+</body>
+</html
