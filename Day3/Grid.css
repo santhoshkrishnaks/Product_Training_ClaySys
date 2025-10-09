@@ -10,9 +10,6 @@ body{
                 grid-template-columns: auto auto;
                 align-items: center;
             }
-            .item2{
-                
-            }
             .footer{
                 margin-top: 2rem;
                 height: 3rem;
