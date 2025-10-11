@@ -1,0 +1,15 @@
+D:\Product_Training\Day13-20\Create First Console App\Create First Console App\bin\Debug\net8.0\Create First Console App.exe
+D:\Product_Training\Day13-20\Create First Console App\Create First Console App\bin\Debug\net8.0\Create First Console App.deps.json
+D:\Product_Training\Day13-20\Create First Console App\Create First Console App\bin\Debug\net8.0\Create First Console App.runtimeconfig.json
+D:\Product_Training\Day13-20\Create First Console App\Create First Console App\bin\Debug\net8.0\Create First Console App.dll
+D:\Product_Training\Day13-20\Create First Console App\Create First Console App\bin\Debug\net8.0\Create First Console App.pdb
+D:\Product_Training\Day13-20\Create First Console App\Create First Console App\obj\Debug\net8.0\Create First Console App.GeneratedMSBuildEditorConfig.editorconfig
+D:\Product_Training\Day13-20\Create First Console App\Create First Console App\obj\Debug\net8.0\Create First Console App.AssemblyInfoInputs.cache
+D:\Product_Training\Day13-20\Create First Console App\Create First Console App\obj\Debug\net8.0\Create First Console App.AssemblyInfo.cs
+D:\Product_Training\Day13-20\Create First Console App\Create First Console App\obj\Debug\net8.0\Create First Console App.csproj.CoreCompileInputs.cache
+D:\Product_Training\Day13-20\Create First Console App\Create First Console App\obj\Debug\net8.0\Create First Console App.sourcelink.json
+D:\Product_Training\Day13-20\Create First Console App\Create First Console App\obj\Debug\net8.0\Create First Console App.dll
+D:\Product_Training\Day13-20\Create First Console App\Create First Console App\obj\Debug\net8.0\refint\Create First Console App.dll
+D:\Product_Training\Day13-20\Create First Console App\Create First Console App\obj\Debug\net8.0\Create First Console App.pdb
+D:\Product_Training\Day13-20\Create First Console App\Create First Console App\obj\Debug\net8.0\Create First Console App.genruntimeconfig.cache
+D:\Product_Training\Day13-20\Create First Console App\Create First Console App\obj\Debug\net8.0\ref\Create First Console App.dll
