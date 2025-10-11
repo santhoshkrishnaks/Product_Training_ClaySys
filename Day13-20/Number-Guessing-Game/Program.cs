@@ -14,7 +14,7 @@ class NumberGuessingGame
             if (number == target)
             {
                 Console.WriteLine("Congratulations! You Guessed the Correct Number");
-                Console.WriteLine("You Guessed the Number by "+attempts+"Attempts");
+                Console.WriteLine("You Guessed the Number by "+attempts+" Attempts");
                 break;
             }
             else if (number < target)
