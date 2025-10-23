@@ -4,9 +4,9 @@ let savingsGoals = get('savingsGoals') || [];
 store('transactions',transactions);
 store('savingsGoals',savingsGoals);
 //tohave next transaction id
-let nextTransactionId = 2;
+let nextTransactionId = 1;
 //to have next goal id
-let nextGoalId = 2;
+let nextGoalId = 1;
 //to have current goal id
 let currentGoalId = null;
 
@@ -273,6 +273,7 @@ function addGoal(e) {
     const name = form.querySelector('input[type="text"]').value;
     const target = parseFloat(form.querySelector('input[type="number"]').value);
  
+    
     if (!name || !target || target <= 0) {
         alert('Please provide a valid goal name and target amount');
         return;
