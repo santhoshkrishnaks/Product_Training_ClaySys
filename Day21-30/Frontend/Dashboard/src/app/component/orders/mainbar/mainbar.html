@@ -1,0 +1,156 @@
+<div class="mainbar-container">
+  <!-- Header -->
+  <header class="header">
+    <div class="breadcrumb">
+      <span class="breadcrumb-head">Orders</span>
+    </div>
+    <div class="header-actions">
+      <div class="brand-shop">
+        <span>Bravaa shop</span>
+        <img src="/dropdown.png" alt="down" class="dropdown-icon"/>
+      </div>
+      <img src="/notification.webp" alt="bell" width="20px" height="20px" style="cursor: pointer;"/>
+      <div class="user-profile">
+        <img src="/profile.webp" alt="User" class="user-avatar">
+      </div>
+    </div>
+  </header>
+  <header class="header">
+    <div class="breadcrumb">
+      <span class="breadcrumb-item">Home</span>
+      <span class="breadcrumb-separator">/</span>
+      <span class="breadcrumb-item active">Order</span>
+    </div>
+</header>
+  <!-- Main Content -->
+  <main class="content">
+    <div class="page-header">
+      <h1 class="page-title">Order Summary</h1>
+      <button class="add-product-btn" (click)="openOrderForm()">+ Add Product</button>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="summary-cards">
+      <div class="summary-card">
+        <h3 class="card-title">Total Order</h3>
+        <div class="card-content">
+          <span class="card-value">Total {{totalOrders}}</span>
+          <span class="card-period">All time</span>
+        </div>
+      </div>
+      <div class="summary-card">
+        <h3 class="card-title completed">Completed Order</h3>
+        <div class="card-content">
+          <span class="card-value">Total {{completedOrders}}</span>
+          <span class="card-period">All time</span>
+        </div>
+      </div>
+      <div class="summary-card">
+        <h3 class="card-title inprocess">In Process Order</h3>
+        <div class="card-content">
+          <span class="card-value">Total {{inProcessOrders}}</span>
+          <span class="card-period">All time</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Order Items Section -->
+    <div class="order-items-section">
+      <h2 class="section-title">Order Items</h2>
+      
+      <div class="table-controls">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input 
+            type="text" 
+            placeholder="Search by name..." 
+            class="search-input"
+            [(ngModel)]="searchText"
+          >
+        </div>
+        <div class="table-actions">
+          <div class="filter-dropdown-container">
+            <button class="filter-btn" (click)="toggleFilterDropdown()">
+              Filter
+              <span class="dropdown-arrow">▼</span>
+            </button>
+            <div class="filter-dropdown" *ngIf="showFilterDropdown">
+              <button class="dropdown-item" (click)="sortOrders('date')">
+                <span class="dropdown-icon"></span>
+                Sort by Date
+                <span class="check-icon" *ngIf="currentSort === 'date'">✓</span>
+              </button>
+              <button class="dropdown-item" (click)="sortOrders('total')">
+                <span class="dropdown-icon"></span>
+                Sort by Total
+                <span class="check-icon" *ngIf="currentSort === 'total'">✓</span>
+              </button>
+              <button class="dropdown-item" (click)="sortOrders('name')">
+                <span class="dropdown-icon"></span>
+                Sort by Name
+                <span class="check-icon" *ngIf="currentSort === 'name'">✓</span>
+              </button>
+            </div>
+          </div>
+          <button class="date-btn"> Date</button>
+          <button class="export-btn">Export</button>
+        </div>
+      </div>
+
+      <!-- Data Table -->
+      <div class="table-container">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th><input type="checkbox"></th>
+              <th>Order</th>
+              <th>Customers</th>
+              <th>Tracking Id</th>
+              <th>Order Date</th>
+              <th>Quantity</th>
+              <th>Location</th>
+              <th>Total</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let order of filteredOrders">
+              <td><input type="checkbox"></td>
+              <td>{{order.orderNum}}</td>
+              <td>{{order.customer}}</td>
+              <td>{{order.trackingId}}</td>
+              <td>{{order.orderDate}}</td>
+              <td>{{order.quantity}}</td>
+              <td>{{order.location}}</td>
+              <td>{{order.total}}</td>
+              <td>
+                <span class="status-badge" [ngClass]="'status-' + order.status.toLowerCase().replace(' ', '-')">
+                  ● {{order.status}}
+                </span>
+              </td>
+              <td>
+                <button class="action-btn">⋮</button>
+              </td>
+            </tr>
+            <tr *ngIf="filteredOrders.length === 0">
+              <td colspan="10" class="no-results">
+                <div class="no-results-content">
+                  <span class="no-results-icon">🔍</span>
+                  <p>No orders found matching "{{searchText}}"</p>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <!-- Order Form Modal -->
+  <app-order-form 
+    *ngIf="showOrderForm"
+    (closeModal)="closeOrderForm()"
+    (submitOrder)="addNewOrder($event)">
+  </app-order-form>
+</div>

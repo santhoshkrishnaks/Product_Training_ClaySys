@@ -1,0 +1,114 @@
+<div class="modal-backdrop" (click)="onCancel()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2 class="modal-title">Add New Order</h2>
+      <button class="close-btn" (click)="onCancel()">&times;</button>
+    </div>
+
+    <form class="order-form" (ngSubmit)="onSubmit()">
+      <div class="form-grid">
+        <!-- Customer Name -->
+        <div class="form-group">
+          <label for="customer">Customer Name *</label>
+          <input
+            type="text"
+            id="customer"
+            [(ngModel)]="formData.customer"
+            name="customer"
+            placeholder="Enter customer name"
+            required
+          />
+        </div>
+
+        <!-- Tracking ID -->
+        <div class="form-group">
+          <label for="trackingId">Tracking ID *</label>
+          <input
+            type="text"
+            id="trackingId"
+            [(ngModel)]="formData.trackingId"
+            name="trackingId"
+            placeholder="#15121321"
+            required
+          />
+        </div>
+
+        <!-- Order Date -->
+        <div class="form-group">
+          <label for="orderDate">Order Date *</label>
+          <input
+            type="datetime-local"
+            id="orderDate"
+            [(ngModel)]="formData.orderDate"
+            name="orderDate"
+            required
+          />
+        </div>
+
+        <!-- Quantity -->
+        <div class="form-group">
+          <label for="quantity">Quantity *</label>
+          <input
+            type="number"
+            id="quantity"
+            [(ngModel)]="formData.quantity"
+            name="quantity"
+            placeholder="0"
+            min="1"
+            required
+          />
+        </div>
+
+        <!-- Location -->
+        <div class="form-group full-width">
+          <label for="location">Location *</label>
+          <input
+            type="text"
+            id="location"
+            [(ngModel)]="formData.location"
+            name="location"
+            placeholder="Syhcet, Bandor"
+            required
+          />
+        </div>
+
+        <!-- Total Amount -->
+        <div class="form-group">
+          <label for="total">Total Amount *</label>
+          <input
+            type="text"
+            id="total"
+            [(ngModel)]="formData.total"
+            name="total"
+            placeholder="$500.00"
+            required
+          />
+        </div>
+
+        <!-- Status -->
+        <div class="form-group">
+          <label for="status">Status *</label>
+          <select
+            id="status"
+            [(ngModel)]="formData.status"
+            name="status"
+            required
+          >
+            <option *ngFor="let status of statusOptions" [value]="status">
+              {{ status }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn-cancel" (click)="onCancel()">
+          Cancel
+        </button>
+        <button type="submit" class="btn-submit" [disabled]="!isFormValid()">
+          Add Order
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
