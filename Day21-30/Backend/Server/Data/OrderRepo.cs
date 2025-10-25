@@ -6,106 +6,166 @@ namespace Server.Data
     public class OrderRepo
     {
         private readonly string _config;
+
         public OrderRepo(IConfiguration config)
         {
-            this._config = config.GetConnectionString("DefaultConnection");
+            _config = config.GetConnectionString("OrderDb");
         }
+
         public List<OrderEntity> GetOrders()
         {
             var orders = new List<OrderEntity>();
-            SqlConnection conn = new SqlConnection(this._config);
-            string query = "select * from Orders";
-            conn.Open();
-            SqlCommand cmd = new SqlCommand(query, conn);
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
+            string query = "SELECT * FROM Orders;";
+
+            try
             {
-                var order = new OrderEntity()
+                using (var conn = new SqlConnection(_config))
+                using (var cmd = new SqlCommand(query, conn))
                 {
-                    OrderId = (int)reader["OrderId"],
-                    CustomerName = reader["CustomerName"].ToString() ?? string.Empty,
-                    TrackingId = reader["TrackingId"].ToString() ?? string.Empty,
-                    OrderDate = (DateTime)reader["OrderDate"],
-                    Quantity = (int)reader["Quantity"],
-                    Location = reader["Location"].ToString() ?? string.Empty,
-                    Total = (decimal)reader["Total"],
-                    Status = reader["Status"].ToString() ?? string.Empty
-                };
-                orders.Add(order);
+                    conn.Open();
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var order = new OrderEntity
+                            {
+                                OrderId = (int)reader["OrderId"],
+                                CustomerName = reader["CustomerName"]?.ToString() ?? string.Empty,
+                                TrackingId = reader["TrackingId"]?.ToString() ?? string.Empty,
+                                OrderDate = (DateTime)reader["OrderDate"],
+                                Quantity = (int)reader["Quantity"],
+                                Location = reader["Location"]?.ToString() ?? string.Empty,
+                                Total = (decimal)reader["Total"],
+                                Status = reader["Status"]?.ToString() ?? string.Empty
+                            };
+                            orders.Add(order);
+                        }
+                    }
+                }
             }
-            conn.Close();
+            catch (SqlException ex)
+            {
+                Console.WriteLine($"SQL Error while fetching orders: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error in GetOrders: {ex.Message}");
+            }
+
             return orders;
         }
-        public void Add(OrderEntity order)
+
+        public bool Add(OrderEntity order)
         {
             order.OrderDate = DateTime.Now;
 
             string query = @"
-        INSERT INTO Orders (CustomerName, TrackingId, OrderDate, Quantity, Location, Total, Status)
-        OUTPUT INSERTED.OrderId
-        VALUES (@CustomerName, @TrackingId, @OrderDate, @Quantity, @Location, @Total, @Status);
-    ";
+                INSERT INTO Orders (CustomerName, TrackingId, OrderDate, Quantity, Location, Total, Status)
+                VALUES (@CustomerName, @TrackingId, @OrderDate, @Quantity, @Location, @Total, @Status);
+            ";
 
-            using (SqlConnection con = new SqlConnection(this._config))
-            using (SqlCommand cmd = new SqlCommand(query, con))
+            try
             {
-                cmd.Parameters.AddWithValue("@CustomerName", order.CustomerName);
-                cmd.Parameters.AddWithValue("@TrackingId", order.TrackingId);
-                cmd.Parameters.AddWithValue("@OrderDate", order.OrderDate);
-                cmd.Parameters.AddWithValue("@Quantity", order.Quantity);
-                cmd.Parameters.AddWithValue("@Location", order.Location);
-                cmd.Parameters.AddWithValue("@Total", order.Total);
-                cmd.Parameters.AddWithValue("@Status", order.Status);
+                using (var con = new SqlConnection(_config))
+                using (var cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@CustomerName", order.CustomerName);
+                    cmd.Parameters.AddWithValue("@TrackingId", order.TrackingId);
+                    cmd.Parameters.AddWithValue("@OrderDate", order.OrderDate);
+                    cmd.Parameters.AddWithValue("@Quantity", order.Quantity);
+                    cmd.Parameters.AddWithValue("@Location", order.Location);
+                    cmd.Parameters.AddWithValue("@Total", order.Total);
+                    cmd.Parameters.AddWithValue("@Status", order.Status);
 
-                con.Open();
-                order.OrderId = (int)cmd.ExecuteScalar();
+                    con.Open();
+                    int rows = cmd.ExecuteNonQuery();
+                    return rows > 0;
+                }
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine($"SQL Error while adding order: {ex.Message}");
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error in Add: {ex.Message}");
+                return false;
             }
         }
+
         public bool Delete(int orderId)
         {
             string query = "DELETE FROM Orders WHERE OrderId = @OrderId";
 
-            using (SqlConnection con = new SqlConnection(this._config))
-            using (SqlCommand cmd = new SqlCommand(query, con))
+            try
             {
-                cmd.Parameters.AddWithValue("@OrderId", orderId);
+                using (var con = new SqlConnection(_config))
+                using (var cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@OrderId", orderId);
 
-                con.Open();
-                int rowsAffected = cmd.ExecuteNonQuery();
-
-                return rowsAffected > 0; // returns true if a row was deleted
+                    con.Open();
+                    int rows = cmd.ExecuteNonQuery();
+                    return rows > 0;
+                }
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine($"SQL Error while deleting order: {ex.Message}");
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error in Delete: {ex.Message}");
+                return false;
             }
         }
+
         public bool Update(OrderEntity order)
         {
-            using (SqlConnection con = new SqlConnection(this._config))
+            string query = @"
+                UPDATE Orders 
+                SET 
+                    CustomerName = @CustomerName,
+                    TrackingId = @TrackingId,
+                    OrderDate = @OrderDate,
+                    Quantity = @Quantity,
+                    Location = @Location,
+                    Total = @Total,
+                    Status = @Status 
+                WHERE OrderId = @OrderId;
+            ";
+
+            try
             {
-                string query = @"UPDATE Orders
-                         SET CustomerName = @CustomerName,
-                             TrackingId = @TrackingId,
-                             OrderDate = @OrderDate,
-                             Quantity = @Quantity,
-                             Location = @Location,
-                             Total = @Total,
-                             Status = @Status
-                         WHERE OrderId = @OrderId";
+                using (var con = new SqlConnection(_config))
+                using (var cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@CustomerName", order.CustomerName);
+                    cmd.Parameters.AddWithValue("@TrackingId", order.TrackingId);
+                    cmd.Parameters.AddWithValue("@OrderDate", order.OrderDate);
+                    cmd.Parameters.AddWithValue("@Quantity", order.Quantity);
+                    cmd.Parameters.AddWithValue("@Location", order.Location);
+                    cmd.Parameters.AddWithValue("@Total", order.Total);
+                    cmd.Parameters.AddWithValue("@Status", order.Status);
+                    cmd.Parameters.AddWithValue("@OrderId", order.OrderId);
 
-                SqlCommand cmd = new SqlCommand(query, con);
-                cmd.Parameters.AddWithValue("@CustomerName", order.CustomerName);
-                cmd.Parameters.AddWithValue("@TrackingId", order.TrackingId);
-                cmd.Parameters.AddWithValue("@OrderDate", order.OrderDate);
-                cmd.Parameters.AddWithValue("@Quantity", order.Quantity);
-                cmd.Parameters.AddWithValue("@Location", order.Location);
-                cmd.Parameters.AddWithValue("@Total", order.Total);
-                cmd.Parameters.AddWithValue("@Status", order.Status);
-                cmd.Parameters.AddWithValue("@OrderId", order.OrderId);
-
-                con.Open();
-                int rowsAffected = cmd.ExecuteNonQuery();
-                return rowsAffected > 0;  // returns true if at least one row was updated
+                    con.Open();
+                    int rows = cmd.ExecuteNonQuery();
+                    return rows > 0;
+                }
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine($"SQL Error while updating order: {ex.Message}");
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error in Update: {ex.Message}");
+                return false;
             }
         }
-
-
     }
 }

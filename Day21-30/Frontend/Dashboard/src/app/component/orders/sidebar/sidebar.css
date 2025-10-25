@@ -44,6 +44,10 @@
     background-color: #f5f5ff;
     color: #5b4cfa;
 }
+.nav-item.active {
+    background-color: #5b4cfa;
+    color: white;
+}
 .nav-icon {
     font-size: 18px;
     width: 25px;

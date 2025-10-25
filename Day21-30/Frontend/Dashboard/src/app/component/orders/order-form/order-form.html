@@ -1,7 +1,7 @@
 <div class="modal-backdrop" (click)="onCancel()">
   <div class="modal-content" (click)="$event.stopPropagation()">
     <div class="modal-header">
-      <h2 class="modal-title">Add New Order</h2>
+      <h2 class="modal-title">{{ isEdit ? 'Update Order' : 'Add New Order' }}</h2>
       <button class="close-btn" (click)="onCancel()">&times;</button>
     </div>
 
@@ -88,12 +88,7 @@
         <!-- Status -->
         <div class="form-group">
           <label for="status">Status *</label>
-          <select
-            id="status"
-            [(ngModel)]="formData.status"
-            name="status"
-            required
-          >
+          <select id="status" [(ngModel)]="formData.status" name="status" required>
             <option *ngFor="let status of statusOptions" [value]="status">
               {{ status }}
             </option>
@@ -102,11 +97,9 @@
       </div>
 
       <div class="form-actions">
-        <button type="button" class="btn-cancel" (click)="onCancel()">
-          Cancel
-        </button>
+        <button type="button" class="btn-cancel" (click)="onCancel()">Cancel</button>
         <button type="submit" class="btn-submit" [disabled]="!isFormValid()">
-          Add Order
+          {{ isEdit ? 'Update Order' : 'Add Order' }}
         </button>
       </div>
     </form>

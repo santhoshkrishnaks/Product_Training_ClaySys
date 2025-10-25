@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Order } from '../../../service/order.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -18,7 +19,9 @@ interface OrderFormData {
   templateUrl: './order-form.html',
   styleUrl: './order-form.css',
 })
-export class OrderForm {
+export class OrderForm implements OnChanges {
+  @Input() isEdit = false;
+  @Input() data?: Order|undefined;
   @Output() closeModal = new EventEmitter<void>();
   @Output() submitOrder = new EventEmitter<OrderFormData>();
 
@@ -29,10 +32,24 @@ export class OrderForm {
     quantity: 0,
     location: '',
     total: '',
-    status: 'Pending'
+    status: 'Pending',
   };
 
   statusOptions = ['Pending', 'In Process', 'Completed'];
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['data'] && this.data) {
+      this.formData = {
+        customer: this.data.customerName || '',
+        trackingId: this.data.trackingId || '',
+        orderDate: this.toLocalDateTime(this.data.orderDate),
+        quantity: this.data.quantity ?? 0,
+        location: this.data.location || '',
+        total: String(this.data.total ?? ''),
+        status: this.data.status || 'Pending',
+      };
+    }
+  }
 
   onSubmit() {
     if (this.isFormValid()) {
@@ -54,7 +71,7 @@ export class OrderForm {
       quantity: 0,
       location: '',
       total: '',
-      status: 'Pending'
+      status: 'Pending',
     };
   }
 
@@ -67,5 +84,15 @@ export class OrderForm {
       this.formData.location &&
       this.formData.total
     );
+  }
+
+  private toLocalDateTime(value?: string): string {
+    if (!value) return '';
+    const d = new Date(value);
+    if (isNaN(d.getTime())) return '';
+    const pad = (n: number) => `${n}`.padStart(2, '0');
+    return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(
+      d.getHours()
+    )}:${pad(d.getMinutes())}`;
   }
 }

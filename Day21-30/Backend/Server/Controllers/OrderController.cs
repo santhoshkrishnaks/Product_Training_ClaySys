@@ -4,7 +4,7 @@ using Server.Model;
 
 namespace Server.Controllers
 {
-    [Route("api/orders")]       // Base route for this controller
+    [Route("api/orders")]
     [ApiController]
     public class OrderController : ControllerBase
     {
@@ -15,53 +15,88 @@ namespace Server.Controllers
             _orderRepo = orderRepo;
         }
 
-        [HttpGet]   // GET api/orders
+        [HttpGet]
         public IActionResult Get()
-        {
-            var orders = _orderRepo.GetOrders();
-            return Ok(orders);
-        }
-        [HttpPost]
-        public IActionResult Post([FromBody] OrderEntity neworder)
         {
             try
             {
-                _orderRepo.Add(neworder);
-                return CreatedAtAction(nameof(Get), new { id = neworder.OrderId }, neworder);
+                var orders = _orderRepo.GetOrders();
+                return Ok(orders);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return StatusCode(500, "Internal server error");
+                return StatusCode(500, "An error occurred while fetching orders");
             }
         }
+
+        [HttpPost]
+        public IActionResult Post([FromBody] OrderEntity newOrder)
+        {
+            if (newOrder == null)
+            {
+                return BadRequest("Order data is required");
+            }
+            try
+            {
+                bool added = _orderRepo.Add(newOrder);
+                if (added)
+                {
+                    return StatusCode(204,"Order added successfully");
+                }
+                else
+                {
+                    return BadRequest("Failed to add order. Please check input data");
+                }
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "An internal server error occurred while adding the order");
+            }
+        }
+
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            bool deleted = _orderRepo.Delete(id);
+            try
+            {
+                bool deleted = _orderRepo.Delete(id);
 
-            if (deleted)
-                return NoContent(); // 204 No Content if deleted successfully
+                if (deleted)
+                {
+                    return NoContent();
+                }
 
-            return NotFound(); // 404 if order not found
+                return NotFound($"Order with ID {id} not found");
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "An error occurred while deleting the order");
+            }
         }
+
         [HttpPut]
         public IActionResult Put([FromBody] OrderEntity updatedOrder)
         {
+            if (updatedOrder == null)
+            {
+                return BadRequest("Order data is required");
+            }
+
             try
             {
                 bool updated = _orderRepo.Update(updatedOrder);
+
                 if (!updated)
                 {
-                    return NotFound();  // No order with this id
+                    return NotFound($"Order with ID {updatedOrder.OrderId} not found");
                 }
-                return NoContent(); // Success, no content to return
+
+                return NoContent();
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                // Log the exception e if needed
-                return StatusCode(500, "Internal server error");
+                return StatusCode(500, "An internal server error occurred while updating the order");
             }
         }
-
     }
 }

@@ -1,18 +1,8 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { OrderForm } from '../order-form/order-form';
-
-interface Order {
-  orderNum: string;
-  customer: string;
-  trackingId: string;
-  orderDate: string;
-  quantity: number;
-  location: string;
-  total: string;
-  status: string;
-}
+import { OrderService, Order } from '../../../service/order.service';
 
 @Component({
   selector: 'app-mainbar',
@@ -20,115 +10,44 @@ interface Order {
   templateUrl: './mainbar.html',
   styleUrl: './mainbar.css',
 })
-export class Mainbar {
+export class Mainbar implements OnInit {
+  // switched to use service-backed data
+  constructor(private orderService: OrderService) {}
+
+  ngOnInit(): void {
+    // fetch orders from backend via service; subscription updates the local array
+    this.orderService.getOrders().subscribe({
+      next: (orders) => {
+        // replace local orders with server-provided ones; if API not configured,
+        // this will error — fill baseUrl in service to enable.
+        this.orders = orders || [];
+        console.log('Loaded orders from API:', orders);
+        this.orderCounter = this.orders.length + 1001;
+      },
+      error: (err) => {
+        // keep current local demo data if backend not available
+        console.warn('Failed to load orders from API (service baseUrl not configured?):', err);
+      },
+    });
+  }
+  orders: Order[] = [];
   showOrderForm = false;
   showFilterDropdown = false;
-  orderCounter = 1003;
   currentSort: string = 'none';
   searchText: string = '';
+  orderCounter: number = 1001;
 
-  orders: Order[] = [
-    {
-      orderNum: '#1002',
-      customer: 'Ariana Mendez',
-      trackingId: '#15121321',
-      orderDate: 'Today - 4:30 pm',
-      quantity: 20,
-      location: 'Syhcet, Bandor',
-      total: '$500.00',
-      status: 'Completed'
-    },
-    {
-      orderNum: '#1002',
-      customer: 'Floyd Miles',
-      trackingId: '#15121321',
-      orderDate: 'Today - 4:30 pm',
-      quantity: 24,
-      location: 'Syhcet, Bandor',
-      total: '$500.00',
-      status: 'In Process'
-    },
-    {
-      orderNum: '#1002',
-      customer: 'Ralph Edwards',
-      trackingId: '#15121321',
-      orderDate: 'Today - 4:30 pm',
-      quantity: 12,
-      location: 'Syhcet, Bandor',
-      total: '$500.00',
-      status: 'Pending'
-    },
-    {
-      orderNum: '#1002',
-      customer: 'Brooklyn Simmons',
-      trackingId: '#15121321',
-      orderDate: 'Today - 4:30 pm',
-      quantity: 15,
-      location: 'Syhcet, Bandor',
-      total: '$500.00',
-      status: 'Completed'
-    },
-    {
-      orderNum: '#1002',
-      customer: 'Dianne Russell',
-      trackingId: '#15121321',
-      orderDate: 'Today - 4:30 pm',
-      quantity: 20,
-      location: 'Syhcet, Bandor',
-      total: '$500.00',
-      status: 'In Process'
-    },
-    {
-      orderNum: '#1002',
-      customer: 'Devon Lane',
-      trackingId: '#15121321',
-      orderDate: 'Today - 4:30 pm',
-      quantity: 15,
-      location: 'Syhcet, Bandor',
-      total: '$500.00',
-      status: 'Completed'
-    },
-    {
-      orderNum: '#1002',
-      customer: 'Courtney Henry',
-      trackingId: '#15121321',
-      orderDate: 'Today - 4:30 pm',
-      quantity: 15,
-      location: 'Syhcet, Bandor',
-      total: '$500.00',
-      status: 'Pending'
-    },
-    {
-      orderNum: '#1002',
-      customer: 'Esther Howard',
-      trackingId: '#15121321',
-      orderDate: 'Today - 4:30 pm',
-      quantity: 0,
-      location: 'Syhcet, Bandor',
-      total: '$500.00',
-      status: 'In Process'
-    },
-    {
-      orderNum: '#1002',
-      customer: 'Jenny Wilson',
-      trackingId: '#15121321',
-      orderDate: 'Today - 4:30 pm',
-      quantity: 15,
-      location: 'Syhcet, Bandor',
-      total: '$500.00',
-      status: 'Completed'
-    }
-  ];
+  openActionMenuIndex: number | null = null;
+  isEditing = false;
+  editingOrderData: Order | null = null;
 
   get filteredOrders(): Order[] {
     if (!this.searchText.trim()) {
       return this.orders;
     }
-    
+
     const searchLower = this.searchText.toLowerCase().trim();
-    return this.orders.filter(order => 
-      order.customer.toLowerCase().includes(searchLower)
-    );
+    return this.orders.filter((order) => order.customerName.toLowerCase().includes(searchLower));
   }
 
   get totalOrders(): number {
@@ -136,48 +55,96 @@ export class Mainbar {
   }
 
   get completedOrders(): number {
-    return this.orders.filter(order => order.status === 'Completed').length;
+    return this.orders.filter((order) => order.status === 'Completed').length;
   }
 
   get inProcessOrders(): number {
-    return this.orders.filter(order => order.status === 'In Process').length;
+    return this.orders.filter((order) => order.status === 'In Process').length;
   }
 
   openOrderForm() {
+    this.isEditing = false;
+    this.editingOrderData = null;
     this.showOrderForm = true;
   }
 
   closeOrderForm() {
     this.showOrderForm = false;
+    this.isEditing = false;
+    this.editingOrderData = null;
   }
 
-  addNewOrder(formData: any) {
-    const newOrder: Order = {
-      orderNum: `#${this.orderCounter++}`,
-      customer: formData.customer,
-      trackingId: formData.trackingId,
-      orderDate: this.formatDateTime(formData.orderDate),
-      quantity: formData.quantity,
-      location: formData.location,
-      total: formData.total,
-      status: formData.status
-    };
-    
-    this.orders.unshift(newOrder); // Add to beginning of list
-    this.closeOrderForm();
+  onSubmitFromForm(formData: any) {
+    if (this.isEditing && this.editingOrderData) {
+      const payload: Order = {
+        orderId: this.editingOrderData.orderId,
+        customerName: formData.customer,
+        trackingId: formData.trackingId,
+        orderDate: new Date(formData.orderDate).toISOString(),
+        quantity: Number(formData.quantity),
+        location: formData.location,
+        total: Number(formData.total),
+        status: formData.status,
+      };
+      this.orderService.updateOrder(payload).subscribe({
+        next: (updated) => {
+          const idx = this.orders.findIndex((o) => o.orderId === updated.orderId);
+          if (idx > -1) this.orders[idx] = updated;
+          this.closeOrderForm();
+        },
+        error: (err) => {
+          console.warn('Update failed; keeping existing data.', err);
+          this.closeOrderForm();
+        },
+      });
+    } else {
+      const newOrder: Order = {
+        orderId: this.orderCounter++,
+        customerName: formData.customer,
+        trackingId: formData.trackingId,
+        orderDate: new Date(formData.orderDate).toISOString(),
+        quantity: Number(formData.quantity),
+        location: formData.location,
+        total: Number(formData.total),
+        status: formData.status,
+      };
+      this.orderService.createOrder(newOrder).subscribe({
+        next: (created) => {
+          this.orders.unshift(created);
+          this.closeOrderForm();
+        },
+        error: (err) => {
+          console.warn('Create failed; adding locally.', err);
+          this.orders.unshift(newOrder);
+          this.closeOrderForm();
+        },
+      });
+    }
   }
 
-  private formatDateTime(dateTimeString: string): string {
-    if (!dateTimeString) return '';
-    const date = new Date(dateTimeString);
-    const today = new Date();
-    const isToday = date.toDateString() === today.toDateString();
-    const timeStr = date.toLocaleTimeString('en-US', { 
-      hour: 'numeric', 
-      minute: '2-digit', 
-      hour12: true 
+  toggleRowMenu(i: number) {
+    this.openActionMenuIndex = this.openActionMenuIndex === i ? null : i;
+  }
+
+  startEdit(order: Order, index: number) {
+    this.isEditing = true;
+    this.editingOrderData = { ...order };
+    this.showOrderForm = true;
+    this.openActionMenuIndex = null;
+  }
+
+  confirmAndDelete(order: Order, index: number) {
+    const ok = confirm(`Delete order ${order.orderId}?`);
+    if (!ok) return;
+    this.orderService.deleteOrder(order.orderId).subscribe({
+      next: () => {
+        this.orders = this.orders.filter((o) => o.orderId !== order.orderId);
+      },
+      error: (err) => {
+        console.warn('Delete failed', err);
+      },
     });
-    return isToday ? `Today - ${timeStr}` : `${date.toLocaleDateString()} - ${timeStr}`;
+    this.openActionMenuIndex = null;
   }
 
   toggleFilterDropdown() {
@@ -190,8 +157,8 @@ export class Mainbar {
 
   sortOrders(sortBy: string) {
     this.currentSort = sortBy;
-    
-    switch(sortBy) {
+
+    switch (sortBy) {
       case 'date':
         this.sortByDate();
         break;
@@ -202,7 +169,7 @@ export class Mainbar {
         this.sortByName();
         break;
     }
-    
+
     this.closeFilterDropdown();
   }
 
@@ -216,15 +183,13 @@ export class Mainbar {
 
   private sortByTotal() {
     this.orders.sort((a, b) => {
-      const totalA = parseFloat(a.total.replace('$', '').replace(',', ''));
-      const totalB = parseFloat(b.total.replace('$', '').replace(',', ''));
-      return totalB - totalA; // Highest first
+      return b.total - a.total; // Highest first
     });
   }
 
   private sortByName() {
     this.orders.sort((a, b) => {
-      return a.customer.localeCompare(b.customer); // A-Z
+      return a.customerName.localeCompare(b.customerName); // A-Z
     });
   }
 
@@ -237,10 +202,10 @@ export class Mainbar {
         let hours = parseInt(timeMatch[1]);
         const minutes = parseInt(timeMatch[2]);
         const isPM = timeMatch[3].toLowerCase() === 'pm';
-        
+
         if (isPM && hours !== 12) hours += 12;
         if (!isPM && hours === 12) hours = 0;
-        
+
         today.setHours(hours, minutes, 0, 0);
         return today;
       }
@@ -253,7 +218,7 @@ export class Mainbar {
   onDocumentClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
     const clickedInside = target.closest('.filter-dropdown-container');
-    
+
     if (!clickedInside && this.showFilterDropdown) {
       this.closeFilterDropdown();
     }
