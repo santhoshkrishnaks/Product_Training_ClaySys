@@ -1,4 +1,3 @@
-/* Modal Backdrop */
 .modal-backdrop {
   position: fixed;
   top: 0;
@@ -9,43 +8,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
-  animation: fadeIn 0.2s ease-in;
+  z-index: 1000;  
 }
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-/* Modal Content */
 .modal-content {
   background: white;
   border-radius: 12px;
   width: 90%;
   max-width: 600px;
-  max-height: 90vh;
+  max-height: 92vh;
   overflow-y: auto;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-  animation: slideUp 0.3s ease-out;
 }
 
-@keyframes slideUp {
-  from {
-    transform: translateY(30px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
 
-/* Modal Header */
 .modal-header {
   display: flex;
   justify-content: space-between;
@@ -58,7 +33,6 @@
   font-size: 20px;
   font-weight: 600;
   color: #1a1a1a;
-  margin: 0;
 }
 
 .close-btn {
@@ -67,30 +41,25 @@
   font-size: 28px;
   color: #999;
   cursor: pointer;
-  padding: 0;
   width: 32px;
   height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 4px;
-  transition: all 0.2s;
 }
-
 .close-btn:hover {
   background: #f0f0f0;
-  color: #333;
 }
 
-/* Order Form */
 .order-form {
   padding: 24px;
 }
 
 .form-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 15px;
   margin-bottom: 24px;
 }
 
@@ -98,10 +67,6 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-}
-
-.form-group.full-width {
-  grid-column: 1 / -1;
 }
 
 .form-group label {
@@ -127,16 +92,6 @@
   box-shadow: 0 0 0 3px rgba(91, 76, 250, 0.1);
 }
 
-.form-group input::placeholder {
-  color: #999;
-}
-
-.form-group input[type="number"] {
-  appearance: textfield;
-  -moz-appearance: textfield;
-}
-
-.form-group input[type="number"]::-webkit-outer-spin-button,
 .form-group input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
@@ -147,7 +102,6 @@
   background: white;
 }
 
-/* Form Actions */
 .form-actions {
   display: flex;
   justify-content: flex-end;
@@ -192,14 +146,13 @@
   opacity: 0.6;
 }
 
-/* Responsive */
 @media (max-width: 640px) {
   .form-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 
   .modal-content {
-    width: 95%;
+    width: 80%;
     max-height: 95vh;
   }
 

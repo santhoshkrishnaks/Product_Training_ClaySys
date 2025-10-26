@@ -1,6 +1,8 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { UserService, User } from '../../service/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,23 +10,49 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
-export class Login {
+export class Login implements OnInit {
   email: string = '';
   password: string = '';
-  @Output() switchToSignup = new EventEmitter<void>();
-
+  users: User[] = [];
+  private router=inject(Router);
+  constructor(private userService: UserService) {}
+  
+  ngOnInit(): void {
+    this.userService.getUsers().subscribe({
+      next: (user) => {(this.users = user || []);
+        console.log('Fetched users:', this.users);  
+      },
+      error: (err) => {
+        console.warn('Failed to fetch users', err);
+      },
+    });
+  }
   onSubmit() {
-    if (this.isFormValid()) {
-      // Simulate login logic
-      alert('Login successful!');
+    if (!this.isFormValid()) return;
+
+    const found = this.users.find(
+      (u) => u.userEmail?.toLowerCase() === this.email.trim().toLowerCase()
+    );
+    
+    if (!found) {
+      alert('User not found. Please sign up.');
+      return;
     }
+
+    if (found.userPassword !== this.password) {
+      alert('Invalid password.');
+      return;
+    }
+
+    alert('Login successful!');
+    this.router.navigate(['/orders']);
   }
 
   isFormValid(): boolean {
-  return !!this.email.trim() && !!this.password.trim();
+    return !!this.email.trim() && !!this.password.trim();
   }
 
   goToSignup() {
-    this.switchToSignup.emit();
+    this.router.navigate(['/signup']);
   }
 }

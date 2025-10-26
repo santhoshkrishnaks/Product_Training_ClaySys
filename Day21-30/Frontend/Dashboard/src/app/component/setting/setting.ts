@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Sidebar } from '../orders/sidebar/sidebar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-setting',
@@ -9,4 +10,17 @@ import { Sidebar } from '../orders/sidebar/sidebar';
   styleUrl: './setting.css',
 })
 export class Setting {
+  private router = inject(Router);
+  isSidebarOpen = false;
+
+  toggleSidebar() {
+    this.isSidebarOpen = !this.isSidebarOpen;
+  }
+
+  closeSidebar() {
+    this.isSidebarOpen = false;
+  }
+  logout() {
+    this.router.navigate (['/login']);
+  }
 }

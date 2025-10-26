@@ -9,4 +9,13 @@ import { Sidebar } from '../orders/sidebar/sidebar';
   styleUrl: './tracking.css',
 })
 export class Tracking {
+  isSidebarOpen = false;
+
+  toggleSidebar() {
+    this.isSidebarOpen = !this.isSidebarOpen;
+  }
+
+  closeSidebar() {
+    this.isSidebarOpen = false;
+  }
 }

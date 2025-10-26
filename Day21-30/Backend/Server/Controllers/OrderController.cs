@@ -41,7 +41,11 @@ namespace Server.Controllers
                 bool added = _orderRepo.Add(newOrder);
                 if (added)
                 {
-                    return StatusCode(204,"Order added successfully");
+                    return StatusCode(StatusCodes.Status201Created, new
+                    {
+                        message = "Order added successfully",
+                        newOrder
+                    });
                 }
                 else
                 {

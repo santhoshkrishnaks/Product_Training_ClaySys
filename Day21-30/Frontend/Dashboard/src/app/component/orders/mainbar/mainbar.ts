@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { OrderForm } from '../order-form/order-form';
@@ -11,21 +11,19 @@ import { OrderService, Order } from '../../../service/order.service';
   styleUrl: './mainbar.css',
 })
 export class Mainbar implements OnInit {
-  // switched to use service-backed data
+  @Output() toggleMenu = new EventEmitter<void>();
+
   constructor(private orderService: OrderService) {}
 
   ngOnInit(): void {
-    // fetch orders from backend via service; subscription updates the local array
+
     this.orderService.getOrders().subscribe({
       next: (orders) => {
-        // replace local orders with server-provided ones; if API not configured,
-        // this will error — fill baseUrl in service to enable.
         this.orders = orders || [];
         console.log('Loaded orders from API:', orders);
         this.orderCounter = this.orders.length + 1001;
       },
       error: (err) => {
-        // keep current local demo data if backend not available
         console.warn('Failed to load orders from API (service baseUrl not configured?):', err);
       },
     });
@@ -87,9 +85,9 @@ export class Mainbar implements OnInit {
         status: formData.status,
       };
       this.orderService.updateOrder(payload).subscribe({
-        next: (updated) => {
-          const idx = this.orders.findIndex((o) => o.orderId === updated.orderId);
-          if (idx > -1) this.orders[idx] = updated;
+        next: () => {
+          const idx = this.orders.findIndex((o) => o.orderId === payload.orderId);
+          if (idx > -1) this.orders[idx] = payload;
           this.closeOrderForm();
         },
         error: (err) => {
@@ -110,12 +108,11 @@ export class Mainbar implements OnInit {
       };
       this.orderService.createOrder(newOrder).subscribe({
         next: (created) => {
-          this.orders.unshift(created);
+          this.orders.push(created);
           this.closeOrderForm();
         },
         error: (err) => {
           console.warn('Create failed; adding locally.', err);
-          this.orders.unshift(newOrder);
           this.closeOrderForm();
         },
       });
@@ -126,14 +123,14 @@ export class Mainbar implements OnInit {
     this.openActionMenuIndex = this.openActionMenuIndex === i ? null : i;
   }
 
-  startEdit(order: Order, index: number) {
+  startEdit(order: Order) {
     this.isEditing = true;
     this.editingOrderData = { ...order };
     this.showOrderForm = true;
     this.openActionMenuIndex = null;
   }
 
-  confirmAndDelete(order: Order, index: number) {
+  confirmAndDelete(order: Order) {
     const ok = confirm(`Delete order ${order.orderId}?`);
     if (!ok) return;
     this.orderService.deleteOrder(order.orderId).subscribe({
@@ -159,9 +156,6 @@ export class Mainbar implements OnInit {
     this.currentSort = sortBy;
 
     switch (sortBy) {
-      case 'date':
-        this.sortByDate();
-        break;
       case 'total':
         this.sortByTotal();
         break;
@@ -173,54 +167,36 @@ export class Mainbar implements OnInit {
     this.closeFilterDropdown();
   }
 
-  private sortByDate() {
-    this.orders.sort((a, b) => {
-      const dateA = this.parseOrderDate(a.orderDate);
-      const dateB = this.parseOrderDate(b.orderDate);
-      return dateB.getTime() - dateA.getTime(); // Newest first
-    });
-  }
+
 
   private sortByTotal() {
     this.orders.sort((a, b) => {
-      return b.total - a.total; // Highest first
+      return b.total - a.total;
     });
   }
 
   private sortByName() {
     this.orders.sort((a, b) => {
-      return a.customerName.localeCompare(b.customerName); // A-Z
+      return a.customerName.localeCompare(b.customerName);
     });
   }
 
-  private parseOrderDate(dateString: string): Date {
-    // Handle "Today - 4:30 pm" format
-    if (dateString.startsWith('Today')) {
-      const timeMatch = dateString.match(/(\d+):(\d+)\s*(am|pm)/i);
-      if (timeMatch) {
-        const today = new Date();
-        let hours = parseInt(timeMatch[1]);
-        const minutes = parseInt(timeMatch[2]);
-        const isPM = timeMatch[3].toLowerCase() === 'pm';
-
-        if (isPM && hours !== 12) hours += 12;
-        if (!isPM && hours === 12) hours = 0;
-
-        today.setHours(hours, minutes, 0, 0);
-        return today;
-      }
-    }
-    // Handle standard date format
-    return new Date(dateString);
-  }
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
     const clickedInside = target.closest('.filter-dropdown-container');
+    const clickedaction = target.closest('.action-menu-wrapper');
 
     if (!clickedInside && this.showFilterDropdown) {
       this.closeFilterDropdown();
     }
+    if(!clickedaction&& this.openActionMenuIndex!==null){
+      this.openActionMenuIndex=null;
+    }
+  }
+
+  emitToggleMenu() {
+    this.toggleMenu.emit();
   }
 }

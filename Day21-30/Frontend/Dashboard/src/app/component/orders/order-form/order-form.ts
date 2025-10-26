@@ -21,7 +21,7 @@ interface OrderFormData {
 })
 export class OrderForm implements OnChanges {
   @Input() isEdit = false;
-  @Input() data?: Order|undefined;
+  @Input() data?: Order|null;
   @Output() closeModal = new EventEmitter<void>();
   @Output() submitOrder = new EventEmitter<OrderFormData>();
 
@@ -42,7 +42,7 @@ export class OrderForm implements OnChanges {
       this.formData = {
         customer: this.data.customerName || '',
         trackingId: this.data.trackingId || '',
-        orderDate: this.toLocalDateTime(this.data.orderDate),
+        orderDate: "2025-10-24T16:20:00",
         quantity: this.data.quantity ?? 0,
         location: this.data.location || '',
         total: String(this.data.total ?? ''),
@@ -84,15 +84,5 @@ export class OrderForm implements OnChanges {
       this.formData.location &&
       this.formData.total
     );
-  }
-
-  private toLocalDateTime(value?: string): string {
-    if (!value) return '';
-    const d = new Date(value);
-    if (isNaN(d.getTime())) return '';
-    const pad = (n: number) => `${n}`.padStart(2, '0');
-    return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(
-      d.getHours()
-    )}:${pad(d.getMinutes())}`;
   }
 }

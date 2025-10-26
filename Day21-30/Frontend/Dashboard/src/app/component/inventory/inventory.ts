@@ -9,4 +9,13 @@ import { Sidebar } from '../orders/sidebar/sidebar';
   styleUrl: './inventory.css',
 })
 export class Inventory {
+  isSidebarOpen = false;
+
+  toggleSidebar() {
+    this.isSidebarOpen = !this.isSidebarOpen;
+  }
+
+  closeSidebar() {
+    this.isSidebarOpen = false;
+  }
 }

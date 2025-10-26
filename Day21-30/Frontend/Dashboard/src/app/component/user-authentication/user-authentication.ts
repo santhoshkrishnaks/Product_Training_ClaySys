@@ -9,4 +9,13 @@ import { Sidebar } from '../orders/sidebar/sidebar';
   styleUrl: './user-authentication.css',
 })
 export class UserAuthentication {
+  isSidebarOpen = false;
+
+  toggleSidebar() {
+    this.isSidebarOpen = !this.isSidebarOpen;
+  }
+
+  closeSidebar() {
+    this.isSidebarOpen = false;
+  }
 }

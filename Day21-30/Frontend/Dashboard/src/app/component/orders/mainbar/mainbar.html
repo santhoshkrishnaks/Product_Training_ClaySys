@@ -1,7 +1,9 @@
 <div class="mainbar-container">
-  <!-- Header -->
   <header class="header">
     <div class="breadcrumb">
+      <button class="menu-toggle-btn" (click)="emitToggleMenu()">
+      <img src="/menu.webp" alt="" height="25px" width="25px">
+      </button>
       <span class="breadcrumb-head">Orders</span>
     </div>
     <div class="header-actions">
@@ -22,45 +24,43 @@
       <span class="breadcrumb-item active">Order</span>
     </div>
   </header>
-  <!-- Main Content -->
+
   <main class="content">
     <div class="page-header">
       <h1 class="page-title">Order Summary</h1>
       <button class="add-product-btn" (click)="openOrderForm()">+ Add Product</button>
     </div>
 
-    <!-- Summary Cards -->
     <div class="summary-cards">
       <div class="summary-card">
         <h3 class="card-title">Total Order</h3>
         <div class="card-content">
           <span class="card-value">Total {{ totalOrders }}</span>
-          <span class="card-period">All time</span>
+          <span class="card-period">Last Week</span>
         </div>
       </div>
       <div class="summary-card">
         <h3 class="card-title completed">Completed Order</h3>
         <div class="card-content">
           <span class="card-value">Total {{ completedOrders }}</span>
-          <span class="card-period">All time</span>
+          <span class="card-period">Last Week</span>
         </div>
       </div>
       <div class="summary-card">
         <h3 class="card-title inprocess">In Process Order</h3>
         <div class="card-content">
           <span class="card-value">Total {{ inProcessOrders }}</span>
-          <span class="card-period">All time</span>
+          <span class="card-period">Last Week</span>
         </div>
       </div>
     </div>
 
-    <!-- Order Items Section -->
     <div class="order-items-section">
       <h2 class="section-title">Order Items</h2>
 
       <div class="table-controls">
         <div class="search-box">
-          <span class="search-icon">🔍</span>
+          <span class="search-icon"><img src="search.jpg" alt="search" height="17px" width="17px"></span>
           <input
             type="text"
             placeholder="Search by name..."
@@ -71,38 +71,37 @@
         <div class="table-actions">
           <div class="filter-dropdown-container">
             <button class="filter-btn" (click)="toggleFilterDropdown()">
+              <img src="filter.webp" alt="Filter" width="15px" height="15px"/>
               Filter
-              <span class="dropdown-arrow">▼</span>
+              <img src="dropdown.png" alt="Filter" width="15px" height="15px"/>
             </button>
             <div class="filter-dropdown" *ngIf="showFilterDropdown">
-              <button class="dropdown-item" (click)="sortOrders('date')">
-                <span class="dropdown-icon"></span>
-                Sort by Date
-                <span class="check-icon" *ngIf="currentSort === 'date'">✓</span>
-              </button>
               <button class="dropdown-item" (click)="sortOrders('total')">
-                <span class="dropdown-icon"></span>
+                <span class="dropdown-icon"><img src="dropdown.png" alt="Filter" width="15px" height="15px"/></span>
                 Sort by Total
-                <span class="check-icon" *ngIf="currentSort === 'total'">✓</span>
               </button>
               <button class="dropdown-item" (click)="sortOrders('name')">
-                <span class="dropdown-icon"></span>
+                <span class="dropdown-icon"><img src="dropdown.png" alt="Filter" width="15px" height="15px"/></span>
                 Sort by Name
-                <span class="check-icon" *ngIf="currentSort === 'name'">✓</span>
               </button>
             </div>
           </div>
-          <button class="date-btn">Date</button>
-          <button class="export-btn">Export</button>
+          <button class="date-btn">
+            <img src="date.webp" alt="Date" width="15px" height="15px"/>
+            Date</button>
+            <button class="export-btn">
+            <img src="download.webp" alt="Download" width="15px" height="15px"/>
+            Export
+
+          </button>
         </div>
       </div>
 
-      <!-- Data Table -->
       <div class="table-container">
         <table class="data-table">
           <thead>
             <tr>
-              <th><input type="checkbox" /></th>
+              <th></th>
               <th>Order</th>
               <th>Customers</th>
               <th>Tracking Id</th>
@@ -129,17 +128,17 @@
                   class="status-badge"
                   [ngClass]="'status-' + order.status.toLowerCase().replace(' ', '-')"
                 >
-                  ● {{ order.status }}
-                </span>
+              </span>
+                  {{ order.status }}
               </td>
               <td>
                 <div class="action-menu-wrapper">
-                  <button class="action-btn" (click)="toggleRowMenu(i); $event.stopPropagation()">
-                    ⋮
+                  <button class="action-btn" (click)="toggleRowMenu(i)">
+                  <img src="/three dot.png" alt="more" width="16px" height="16px"/>
                   </button>
                   <div class="row-action-menu" *ngIf="openActionMenuIndex === i">
-                    <button class="row-action-item" (click)="startEdit(order, i)">Update</button>
-                    <button class="row-action-item danger" (click)="confirmAndDelete(order, i)">
+                    <button class="row-action-item" (click)="startEdit(order)">Update</button>
+                    <button class="row-action-item danger" (click)="confirmAndDelete(order)">
                       Delete
                     </button>
                   </div>
@@ -149,7 +148,6 @@
             <tr *ngIf="filteredOrders.length === 0">
               <td colspan="10" class="no-results">
                 <div class="no-results-content">
-                  <span class="no-results-icon">🔍</span>
                   <p>No orders found matching "{{ searchText }}"</p>
                 </div>
               </td>
@@ -160,16 +158,12 @@
     </div>
   </main>
 
-  <!-- Order Form Modal -->
+
   <app-order-form
     *ngIf="showOrderForm"
     [isEdit]="isEditing"
-    [data]="editingOrderData"
+    [data]="isEditing ? editingOrderData : null"
     (closeModal)="closeOrderForm()"
     (submitOrder)="onSubmitFromForm($event)"
-  >
-  <app-order-form 
-    *ngIf="showOrderForm"
-    [isEdit]="isEditing"
-    [data]="isEditing ? editingOrderData : undefined"
-></app-order-form>
+  ></app-order-form>
+</div>

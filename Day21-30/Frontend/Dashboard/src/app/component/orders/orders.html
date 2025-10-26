@@ -1,4 +1,6 @@
 <div class="container">
-  <app-sidebar class="sidebar"></app-sidebar>
-  <app-mainbar class="mainbar"></app-mainbar>
+  <app-sidebar class="sidebar" [class.sidebar-open]="isSidebarOpen" (click)="closeSidebar()">
+  </app-sidebar>
+  <div class="sidebar-backdrop" *ngIf="isSidebarOpen" (click)="closeSidebar()"></div>
+  <app-mainbar class="mainbar" (toggleMenu)="toggleSidebar()"> </app-mainbar>
 </div>

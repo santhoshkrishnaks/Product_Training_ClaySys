@@ -44,7 +44,11 @@ namespace Server.Controllers
 
                 if (added)
                 {
-                    return StatusCode(204,"User added successfully");
+                    return StatusCode(StatusCodes.Status201Created, new
+                    {
+                        message = "User added successfully",
+                        user
+                    });
                 }
                 else
                 {

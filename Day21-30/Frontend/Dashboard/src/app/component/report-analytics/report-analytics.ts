@@ -9,4 +9,13 @@ import { Sidebar } from '../orders/sidebar/sidebar';
   styleUrl: './report-analytics.css',
 })
 export class ReportAnalytics {
+  isSidebarOpen = false;
+
+  toggleSidebar() {
+    this.isSidebarOpen = !this.isSidebarOpen;
+  }
+
+  closeSidebar() {
+    this.isSidebarOpen = false;
+  }
 }

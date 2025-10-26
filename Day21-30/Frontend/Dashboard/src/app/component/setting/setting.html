@@ -1,9 +1,13 @@
 <div class="app-container">
-  <app-sidebar></app-sidebar>
+  <app-sidebar [class.sidebar-open]="isSidebarOpen"></app-sidebar>
+  <div class="sidebar-backdrop" *ngIf="isSidebarOpen" (click)="closeSidebar()"></div>
   <div class="main-content">
     <header class="header">
     <div class="breadcrumb">
-      <span style="color: black;font-size: 1.4rem;">Settings</span>
+      <button class="menu-toggle-btn" (click)="toggleSidebar()">
+        <img src="/menu.webp" alt="" height="25px" width="25px">
+      </button>
+      <span style="color: black;font-size: 1.4rem;">Inventory</span>
     </div>
     <div class="header-actions">
       <div class="brand-shop">
@@ -20,8 +24,9 @@
     <div class="breadcrumb">
       <span class="breadcrumb-item">Home</span>
       <span class="breadcrumb-separator">/</span>
-      <span class="breadcrumb-item active">Settings</span>
+      <span class="breadcrumb-item active">Inventory</span>
     </div>
 </header>
+<button class="add-product-btn" (click)="logout()">Logout</button>
   </div>
 </div>

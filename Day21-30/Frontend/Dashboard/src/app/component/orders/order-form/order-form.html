@@ -1,13 +1,14 @@
-<div class="modal-backdrop" (click)="onCancel()">
-  <div class="modal-content" (click)="$event.stopPropagation()">
+<div class="modal-backdrop">
+  <div class="modal-content">
     <div class="modal-header">
       <h2 class="modal-title">{{ isEdit ? 'Update Order' : 'Add New Order' }}</h2>
-      <button class="close-btn" (click)="onCancel()">&times;</button>
+      <button class="close-btn" (click)="onCancel()">
+        <img src="/close-x.svg" alt="Close" height="15px" width="15px" />
+      </button>
     </div>
 
     <form class="order-form" (ngSubmit)="onSubmit()">
       <div class="form-grid">
-        <!-- Customer Name -->
         <div class="form-group">
           <label for="customer">Customer Name *</label>
           <input
@@ -15,12 +16,10 @@
             id="customer"
             [(ngModel)]="formData.customer"
             name="customer"
-            placeholder="Enter customer name"
             required
           />
         </div>
 
-        <!-- Tracking ID -->
         <div class="form-group">
           <label for="trackingId">Tracking ID *</label>
           <input
@@ -28,24 +27,10 @@
             id="trackingId"
             [(ngModel)]="formData.trackingId"
             name="trackingId"
-            placeholder="#15121321"
             required
           />
         </div>
 
-        <!-- Order Date -->
-        <div class="form-group">
-          <label for="orderDate">Order Date *</label>
-          <input
-            type="datetime-local"
-            id="orderDate"
-            [(ngModel)]="formData.orderDate"
-            name="orderDate"
-            required
-          />
-        </div>
-
-        <!-- Quantity -->
         <div class="form-group">
           <label for="quantity">Quantity *</label>
           <input
@@ -53,26 +38,21 @@
             id="quantity"
             [(ngModel)]="formData.quantity"
             name="quantity"
-            placeholder="0"
             min="1"
             required
           />
         </div>
 
-        <!-- Location -->
-        <div class="form-group full-width">
+        <div class="form-group">
           <label for="location">Location *</label>
           <input
             type="text"
             id="location"
             [(ngModel)]="formData.location"
             name="location"
-            placeholder="Syhcet, Bandor"
             required
           />
         </div>
-
-        <!-- Total Amount -->
         <div class="form-group">
           <label for="total">Total Amount *</label>
           <input
@@ -80,12 +60,10 @@
             id="total"
             [(ngModel)]="formData.total"
             name="total"
-            placeholder="$500.00"
             required
           />
         </div>
 
-        <!-- Status -->
         <div class="form-group">
           <label for="status">Status *</label>
           <select id="status" [(ngModel)]="formData.status" name="status" required>
