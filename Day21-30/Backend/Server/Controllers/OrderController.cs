@@ -16,6 +16,8 @@ namespace Server.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(500)]
         public IActionResult Get()
         {
             try
@@ -30,6 +32,9 @@ namespace Server.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(500)]
+        [ProducesResponseType(404)]
         public IActionResult Post([FromBody] OrderEntity newOrder)
         {
             if (newOrder == null)
@@ -59,6 +64,9 @@ namespace Server.Controllers
         }
 
         [HttpDelete("{id}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(500)]
+        [ProducesResponseType(404)]
         public IActionResult Delete(int id)
         {
             try
@@ -79,6 +87,7 @@ namespace Server.Controllers
         }
 
         [HttpPut]
+        [ProducesResponseType(200)]
         public IActionResult Put([FromBody] OrderEntity updatedOrder)
         {
             if (updatedOrder == null)

@@ -16,12 +16,11 @@ export class Mainbar implements OnInit {
   constructor(private orderService: OrderService) {}
 
   ngOnInit(): void {
-
     this.orderService.getOrders().subscribe({
       next: (orders) => {
         this.orders = orders || [];
         console.log('Loaded orders from API:', orders);
-        this.orderCounter = this.orders.length + 1001;
+        this.orderCounter = this.orders[this.orders.length - 1]?.orderId + 1 || 1001;
       },
       error: (err) => {
         console.warn('Failed to load orders from API (service baseUrl not configured?):', err);
@@ -38,6 +37,17 @@ export class Mainbar implements OnInit {
   openActionMenuIndex: number | null = null;
   isEditing = false;
   editingOrderData: Order | null = null;
+
+  private getCurrentDateTime(): string {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+  }
 
   get filteredOrders(): Order[] {
     if (!this.searchText.trim()) {
@@ -73,12 +83,14 @@ export class Mainbar implements OnInit {
   }
 
   onSubmitFromForm(formData: any) {
+    const currentDate = this.getCurrentDateTime();
+
     if (this.isEditing && this.editingOrderData) {
       const payload: Order = {
         orderId: this.editingOrderData.orderId,
         customerName: formData.customer,
         trackingId: formData.trackingId,
-        orderDate: new Date(formData.orderDate).toISOString(),
+        orderDate: currentDate,
         quantity: Number(formData.quantity),
         location: formData.location,
         total: Number(formData.total),
@@ -100,7 +112,7 @@ export class Mainbar implements OnInit {
         orderId: this.orderCounter++,
         customerName: formData.customer,
         trackingId: formData.trackingId,
-        orderDate: new Date(formData.orderDate).toISOString(),
+        orderDate: currentDate,
         quantity: Number(formData.quantity),
         location: formData.location,
         total: Number(formData.total),
@@ -108,11 +120,24 @@ export class Mainbar implements OnInit {
       };
       this.orderService.createOrder(newOrder).subscribe({
         next: (created) => {
-          this.orders.push(created);
+          console.log('Order created via API:', created);
+          const completeOrder: Order = {
+            orderId: created.orderId || newOrder.orderId,
+            customerName: created.customerName || newOrder.customerName,
+            trackingId: created.trackingId || newOrder.trackingId,
+            orderDate: created.orderDate || newOrder.orderDate,
+            quantity: created.quantity ?? newOrder.quantity,
+            location: created.location || newOrder.location,
+            total: created.total ?? newOrder.total,
+            status: created.status || newOrder.status,
+          };
+          this.orders.push(completeOrder);
           this.closeOrderForm();
         },
         error: (err) => {
+          
           console.warn('Create failed; adding locally.', err);
+          this.orders.push(newOrder);
           this.closeOrderForm();
         },
       });
@@ -167,8 +192,6 @@ export class Mainbar implements OnInit {
     this.closeFilterDropdown();
   }
 
-
-
   private sortByTotal() {
     this.orders.sort((a, b) => {
       return b.total - a.total;
@@ -181,7 +204,6 @@ export class Mainbar implements OnInit {
     });
   }
 
-
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
@@ -191,8 +213,8 @@ export class Mainbar implements OnInit {
     if (!clickedInside && this.showFilterDropdown) {
       this.closeFilterDropdown();
     }
-    if(!clickedaction&& this.openActionMenuIndex!==null){
-      this.openActionMenuIndex=null;
+    if (!clickedaction && this.openActionMenuIndex !== null) {
+      this.openActionMenuIndex = null;
     }
   }
 

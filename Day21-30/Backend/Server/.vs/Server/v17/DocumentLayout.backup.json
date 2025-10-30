@@ -3,36 +3,40 @@
   "WorkspaceRootPath": "E:\\Product_Training_ClaySys\\Product_Training_ClaySys\\Day21-30\\Backend\\Server\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{423FC1B7-51A6-4DEC-B392-B3FE361EB6B2}|Server.csproj|e:\\product_training_claysys\\product_training_claysys\\day21-30\\backend\\server\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{423FC1B7-51A6-4DEC-B392-B3FE361EB6B2}|Server.csproj|solutionrelative:controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{423FC1B7-51A6-4DEC-B392-B3FE361EB6B2}|Server.csproj|e:\\product_training_claysys\\product_training_claysys\\day21-30\\backend\\server\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{423FC1B7-51A6-4DEC-B392-B3FE361EB6B2}|Server.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{423FC1B7-51A6-4DEC-B392-B3FE361EB6B2}|Server.csproj|e:\\product_training_claysys\\product_training_claysys\\day21-30\\backend\\server\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{423FC1B7-51A6-4DEC-B392-B3FE361EB6B2}|Server.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{423FC1B7-51A6-4DEC-B392-B3FE361EB6B2}|Server.csproj|e:\\product_training_claysys\\product_training_claysys\\day21-30\\backend\\server\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{423FC1B7-51A6-4DEC-B392-B3FE361EB6B2}|Server.csproj|solutionrelative:controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{423FC1B7-51A6-4DEC-B392-B3FE361EB6B2}|Server.csproj|e:\\product_training_claysys\\product_training_claysys\\day21-30\\backend\\server\\server.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
       "RelativeMoniker": "D:0:0:{423FC1B7-51A6-4DEC-B392-B3FE361EB6B2}|Server.csproj|solutionrelative:server.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{423FC1B7-51A6-4DEC-B392-B3FE361EB6B2}|Server.csproj|e:\\product_training_claysys\\product_training_claysys\\day21-30\\backend\\server\\model\\userentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{423FC1B7-51A6-4DEC-B392-B3FE361EB6B2}|Server.csproj|solutionrelative:model\\userentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{423FC1B7-51A6-4DEC-B392-B3FE361EB6B2}|Server.csproj|e:\\product_training_claysys\\product_training_claysys\\day21-30\\backend\\server\\model\\orderentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{423FC1B7-51A6-4DEC-B392-B3FE361EB6B2}|Server.csproj|solutionrelative:model\\orderentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\Product_Training_ClaySys\\Product_Training_ClaySys\\Day21-30\\Backend\\Server\\Server.csproj.user||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Server.csproj.user||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{423FC1B7-51A6-4DEC-B392-B3FE361EB6B2}|Server.csproj|e:\\product_training_claysys\\product_training_claysys\\day21-30\\backend\\server\\data\\userrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{423FC1B7-51A6-4DEC-B392-B3FE361EB6B2}|Server.csproj|solutionrelative:data\\userrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{423FC1B7-51A6-4DEC-B392-B3FE361EB6B2}|Server.csproj|e:\\product_training_claysys\\product_training_claysys\\day21-30\\backend\\server\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{423FC1B7-51A6-4DEC-B392-B3FE361EB6B2}|Server.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{423FC1B7-51A6-4DEC-B392-B3FE361EB6B2}|Server.csproj|e:\\product_training_claysys\\product_training_claysys\\day21-30\\backend\\server\\model\\orderentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{423FC1B7-51A6-4DEC-B392-B3FE361EB6B2}|Server.csproj|solutionrelative:model\\orderentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{423FC1B7-51A6-4DEC-B392-B3FE361EB6B2}|Server.csproj|e:\\product_training_claysys\\product_training_claysys\\day21-30\\backend\\server\\data\\orderrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{423FC1B7-51A6-4DEC-B392-B3FE361EB6B2}|Server.csproj|solutionrelative:data\\orderrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{423FC1B7-51A6-4DEC-B392-B3FE361EB6B2}|Server.csproj|e:\\product_training_claysys\\product_training_claysys\\day21-30\\backend\\server\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{423FC1B7-51A6-4DEC-B392-B3FE361EB6B2}|Server.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{423FC1B7-51A6-4DEC-B392-B3FE361EB6B2}|Server.csproj|e:\\product_training_claysys\\product_training_claysys\\day21-30\\backend\\server\\model\\userentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{423FC1B7-51A6-4DEC-B392-B3FE361EB6B2}|Server.csproj|solutionrelative:model\\userentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{423FC1B7-51A6-4DEC-B392-B3FE361EB6B2}|Server.csproj|e:\\product_training_claysys\\product_training_claysys\\day21-30\\backend\\server\\server.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
@@ -58,16 +62,15 @@
               "Title": "Server.http",
               "DocumentMoniker": "E:\\Product_Training_ClaySys\\Product_Training_ClaySys\\Day21-30\\Backend\\Server\\Server.http",
               "RelativeDocumentMoniker": "Server.http",
-              "ToolTip": "E:\\Product_Training_ClaySys\\Product_Training_ClaySys\\Day21-30\\Backend\\Server\\Server.http*",
-              "RelativeToolTip": "Server.http*",
+              "ToolTip": "E:\\Product_Training_ClaySys\\Product_Training_ClaySys\\Day21-30\\Backend\\Server\\Server.http",
+              "RelativeToolTip": "Server.http",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
-              "WhenOpened": "2025-10-25T14:34:45.882Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-25T14:34:45.882Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "UserRepo.cs",
               "DocumentMoniker": "E:\\Product_Training_ClaySys\\Product_Training_ClaySys\\Day21-30\\Backend\\Server\\Data\\UserRepo.cs",
               "RelativeDocumentMoniker": "Data\\UserRepo.cs",
@@ -75,36 +78,24 @@
               "RelativeToolTip": "Data\\UserRepo.cs",
               "ViewState": "AgIAAD4AAAAAAAAAAAAmwFQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-25T10:04:33.208Z"
+              "WhenOpened": "2025-10-25T10:04:33.208Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "UserController.cs",
               "DocumentMoniker": "E:\\Product_Training_ClaySys\\Product_Training_ClaySys\\Day21-30\\Backend\\Server\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "Controllers\\UserController.cs",
               "ToolTip": "E:\\Product_Training_ClaySys\\Product_Training_ClaySys\\Day21-30\\Backend\\Server\\Controllers\\UserController.cs",
               "RelativeToolTip": "Controllers\\UserController.cs",
-              "ViewState": "AgIAACEAAAAAAAAAAAAcwDEAAAAcAAAAAAAAAA==",
+              "ViewState": "AgIAACEAAAAAAAAAAAA0wDEAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-25T09:30:56.455Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-25T09:30:56.455Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "UserEntity.cs",
-              "DocumentMoniker": "E:\\Product_Training_ClaySys\\Product_Training_ClaySys\\Day21-30\\Backend\\Server\\Model\\UserEntity.cs",
-              "RelativeDocumentMoniker": "Model\\UserEntity.cs",
-              "ToolTip": "E:\\Product_Training_ClaySys\\Product_Training_ClaySys\\Day21-30\\Backend\\Server\\Model\\UserEntity.cs",
-              "RelativeToolTip": "Model\\UserEntity.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA5AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-25T09:31:49.511Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "OrderEntity.cs",
               "DocumentMoniker": "E:\\Product_Training_ClaySys\\Product_Training_ClaySys\\Day21-30\\Backend\\Server\\Model\\OrderEntity.cs",
               "RelativeDocumentMoniker": "Model\\OrderEntity.cs",
@@ -116,32 +107,44 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "OrderController.cs",
               "DocumentMoniker": "E:\\Product_Training_ClaySys\\Product_Training_ClaySys\\Day21-30\\Backend\\Server\\Controllers\\OrderController.cs",
               "RelativeDocumentMoniker": "Controllers\\OrderController.cs",
-              "ToolTip": "E:\\Product_Training_ClaySys\\Product_Training_ClaySys\\Day21-30\\Backend\\Server\\Controllers\\OrderController.cs*",
-              "RelativeToolTip": "Controllers\\OrderController.cs*",
-              "ViewState": "AgIAACAAAAAAAAAAAAAAAC4AAAAgAAAAAAAAAA==",
+              "ToolTip": "E:\\Product_Training_ClaySys\\Product_Training_ClaySys\\Day21-30\\Backend\\Server\\Controllers\\OrderController.cs",
+              "RelativeToolTip": "Controllers\\OrderController.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAowFoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-25T06:07:06.386Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-25T06:07:06.386Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 0,
               "Title": "appsettings.json",
               "DocumentMoniker": "E:\\Product_Training_ClaySys\\Product_Training_ClaySys\\Day21-30\\Backend\\Server\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
               "ToolTip": "E:\\Product_Training_ClaySys\\Product_Training_ClaySys\\Day21-30\\Backend\\Server\\appsettings.json",
               "RelativeToolTip": "appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAxAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-10-24T17:33:49.761Z"
+              "WhenOpened": "2025-10-24T17:33:49.761Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 3,
+              "Title": "Server.csproj.user",
+              "DocumentMoniker": "E:\\Product_Training_ClaySys\\Product_Training_ClaySys\\Day21-30\\Backend\\Server\\Server.csproj.user",
+              "RelativeDocumentMoniker": "Server.csproj.user",
+              "ToolTip": "E:\\Product_Training_ClaySys\\Product_Training_ClaySys\\Day21-30\\Backend\\Server\\Server.csproj.user",
+              "RelativeToolTip": "Server.csproj.user",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003464|",
+              "WhenOpened": "2025-10-28T04:12:36.161Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "OrderRepo.cs",
               "DocumentMoniker": "E:\\Product_Training_ClaySys\\Product_Training_ClaySys\\Day21-30\\Backend\\Server\\Data\\OrderRepo.cs",
               "RelativeDocumentMoniker": "Data\\OrderRepo.cs",
@@ -149,11 +152,24 @@
               "RelativeToolTip": "Data\\OrderRepo.cs",
               "ViewState": "AgIAAJQAAAAAAAAAAAAAwKsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-25T10:18:31.938Z"
+              "WhenOpened": "2025-10-25T10:18:31.938Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
+              "Title": "UserEntity.cs",
+              "DocumentMoniker": "E:\\Product_Training_ClaySys\\Product_Training_ClaySys\\Day21-30\\Backend\\Server\\Model\\UserEntity.cs",
+              "RelativeDocumentMoniker": "Model\\UserEntity.cs",
+              "ToolTip": "E:\\Product_Training_ClaySys\\Product_Training_ClaySys\\Day21-30\\Backend\\Server\\Model\\UserEntity.cs",
+              "RelativeToolTip": "Model\\UserEntity.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-25T09:31:49.511Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "Server",
               "DocumentMoniker": "E:\\Product_Training_ClaySys\\Product_Training_ClaySys\\Day21-30\\Backend\\Server\\Server.csproj",
               "RelativeDocumentMoniker": "Server.csproj",
@@ -164,7 +180,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "Program.cs",
               "DocumentMoniker": "E:\\Product_Training_ClaySys\\Product_Training_ClaySys\\Day21-30\\Backend\\Server\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
