@@ -10,7 +10,7 @@ export interface User {
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-  private readonly baseUrl = 'http://localhost:8081/api';
+  private readonly baseUrl = 'https://localhost:7219/api';
 
   constructor(private http: HttpClient) {}
 

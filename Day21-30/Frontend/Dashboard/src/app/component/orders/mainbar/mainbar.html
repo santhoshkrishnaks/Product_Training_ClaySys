@@ -2,18 +2,18 @@
   <header class="header">
     <div class="breadcrumb">
       <button class="menu-toggle-btn" (click)="emitToggleMenu()">
-      <img src="/menu.png" alt="" height="25px" width="25px">
+      <img src="menu.png" alt="" height="25px" width="25px">
       </button>
       <span class="breadcrumb-head">Orders</span>
     </div>
     <div class="header-actions">
       <div class="brand-shop">
         <span>Bravaa shop</span>
-        <img src="/dropdown.png" alt="down" class="dropdown-icon" />
+        <img src="dropdown.png" alt="down" class="dropdown-icon" />
       </div>
-      <img src="/notification.png" alt="bell" width="20px" height="20px" style="cursor: pointer" />
+      <img src="notification.png" alt="bell" width="20px" height="20px" style="cursor: pointer" />
       <div class="user-profile">
-        <img src="/avatar.jpeg" alt="User" class="user-avatar" />
+        <img src="avatar.jpeg" alt="User" class="user-avatar" />
       </div>
     </div>
   </header>
@@ -134,7 +134,7 @@
               <td>
                 <div class="action-menu-wrapper">
                   <button class="action-btn" (click)="toggleRowMenu(i)">
-                  <img src="/three dot.png" alt="more" width="16px" height="16px"/>
+                  <img src="three dot.png" alt="more" width="16px" height="16px"/>
                   </button>
                   <div class="row-action-menu" *ngIf="openActionMenuIndex === i">
                     <button class="row-action-item" (click)="startEdit(order)">Update</button>
