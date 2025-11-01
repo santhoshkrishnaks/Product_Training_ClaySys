@@ -15,8 +15,6 @@ function createWindow() {
   if (!fs.existsSync(indexPath)) {
     indexPath = path.join(process.resourcesPath, 'dist', 'Dashboard', 'browser', 'index.html');
   }
-
-  console.log('Loading index from:', indexPath);
   win.loadFile(indexPath);
    Menu.setApplicationMenu(null);
 }
